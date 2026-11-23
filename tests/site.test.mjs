@@ -81,7 +81,11 @@ test('all four division routes and cards are linked',()=>{
  for(const u of units){
   assert.match(html,new RegExp(`href="/units/${u.id}/"`));
   assert.match(renderPage('units/'+u.id),new RegExp(`assets/units/${u.id}\\.webp`));
-  assert.match(renderPage('units/'+u.id),/Мінімальне звання/);
+  const detail=renderPage('units/'+u.id);
+  assert.doesNotMatch(detail,/Мінімальне звання|unit-selection|unit-back|unit-recruitment/);
+  assert.match(detail,new RegExp(`assets/units/details/${u.id}\\.webp`));
+  assert.match(detail,/Керівник/);
+  assert.match(detail,/Заступник/);
  }
 });
 
@@ -89,8 +93,11 @@ test('only published records are visible and no simulated news are invented',()=
  assert.equal(documentPosts.length,2);
  const html=renderPage('documents');
  for(const doc of documentPosts)assert.match(html,new RegExp(doc.href.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
- assert.match(html,/Внутрішні та обмежені матеріали/);
- assert.match(renderPage('news'),/Нових повідомлень немає/);
+ assert.match(html,/class="news-state-icon"/);
+ assert.doesNotMatch(html,/news-reference-links|ПУБЛІЧНИЙ РЕЄСТР/);
+ const news=renderPage('news');
+ assert.match(news,/class="news-state-icon"/);
+ assert.doesNotMatch(news,/Пресцентр|Також може знадобитися|news-reference-links/);
 });
 
 test('recruitment form fields match the backend and staff access is server-backed',()=>{
@@ -133,7 +140,7 @@ test('external links survive, public management link is hidden, director portrai
   assert.doesNotMatch(contacts,/href="\/(?:en\/|de\/)?staff\/"/);
   assert.match(contacts,/Discord/);
   const news=renderPage('news',lg);
-  assert.match(news,/news-reference-links/);
+  assert.doesNotMatch(news,/news-reference-links/);
   assert.doesNotMatch(news, /↗|✦|class="publication-symbol"/);
   const bureau=renderPage('bureau',lg);
   assert.match(bureau,/leader-portrait/);
@@ -144,11 +151,11 @@ test('external links survive, public management link is hidden, director portrai
 });
 
 
-test('3.6 press page has continuous reference links with no standalone card grid or decorative arrows',()=>{
+test('press and documents pages use centered icons without excess navigation and borders',()=>{
  for(const lg of ['uk','en','de']){
   const news=renderPage('news',lg);
   assert.match(news,/class="news-empty-state"/);
-  assert.match(news,/class="news-reference-items"/);
+  assert.doesNotMatch(news,/class="news-reference-items"/);
   assert.doesNotMatch(news,/class="resource-link"|class="publication-symbol"|class="publication-placeholder"|↗|✦/);
   const docs=renderPage('documents',lg);
   assert.match(docs,/class="record-list"/);
@@ -164,4 +171,38 @@ test('each department has restored original photographic editorial composition, 
   assert.match(h,/class="unit-responsibilities"/);
   assert.doesNotMatch(h,/class="task-tile"|class="task-grid"|✦/);
  }
+});
+
+test('public individual division pages hide selection details, but academy discloses published internal ranks',()=>{
+ for(const lang of ['uk','en','de'])for(const u of units){
+  const html=renderPage('units/'+u.id,lang);
+  assert.doesNotMatch(html,/unit-selection|unit-recruitment|unit-back/);
+  assert.match(html,new RegExp(`assets/units/details/${u.id}\\.webp`));
+ }
+ const academy=renderPage('academy');
+ assert.match(academy,/class="training-step"/);
+ assert.match(academy,/Senior Agent/);
+ assert.match(academy,/class="rank-entry-number">04/);
+ assert.match(academy,/class="rank-entry-number">03/);
+ assert.match(academy,/<ol class="training-grid"/);
+});
+
+test('compact public placeholders and contacts have no oversized decorative icons or fake social links',()=>{
+ const news=renderPage('news');
+ assert.doesNotMatch(news,/Пресцентр|Також може знадобитися/);
+ const docs=renderPage('documents');
+ assert.doesNotMatch(docs,/news-reference-links|Публічний реєстр/);
+ const contacts=renderPage('contacts');
+ assert.match(contacts,/assets\/brands\/discord.svg/);
+ assert.match(contacts,/assets\/brands\/instagram.svg/);
+ assert.match(contacts,/assets\/brands\/tiktok.svg/);
+ assert.doesNotMatch(contacts,/href="https:\/\/instagram.com\/"|href="https:\/\/tiktok.com\/"/);
+ assert.match(css,/\.nav-link\.current:hover::before/);
+});
+
+test('dossier cards do not display extra combined position text',()=>{
+ const page=renderPage('bureau');
+ assert.match(page,/profile-trigger/);
+ assert.doesNotMatch(page,/Директор FIB · Керівник ЦСО/);
+ assert.match(page,/Директор FIB Olymp/);
 });

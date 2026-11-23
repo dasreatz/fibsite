@@ -10,7 +10,7 @@ test('42 localized HTML pages with shared CSS, JS and required assets',async()=>
  for(const img of ['hero-csoa.webp','fib-seal.webp','favicon.png'])assert.ok((await stat(new URL('assets/'+img,dist))).size>2000);
  for(const lang of ['','en/','de/']){
   const html=await readFile(new URL(lang+'index.html',dist),'utf8');
-  assert.match(html,/Origin-3\.6\.0-site-refresh/);
+  assert.match(html,/Origin-3\.9\.0-cohesive/);
   assert.match(html,/<link rel="stylesheet" href="\/styles\.css">/);
   assert.match(html,/<script src="\/app\.js" defer><\/script>/);
   assert.doesNotMatch(html,/data:image\/webp;base64,/);
@@ -20,7 +20,7 @@ test('private files never published',async()=>{
  const names=await readdir(dist);
  for(const disallowed of ['runtime-data','.env','.env.example','lib','README.md','server.mjs','staff-data.json'])assert.ok(!names.includes(disallowed));
  const html=await readFile(new URL('documents/index.html',dist),'utf8');
- assert.match(html,/Публічний реєстр/);
+ assert.match(html,/class="news-empty-state document-state"/);
 });
 
 test('source layout has no obsolete parallel app or duplicate published pages',async()=>{

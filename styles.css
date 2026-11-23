@@ -972,3 +972,167 @@
 /* Remove legacy gradient outline on the entry banner; keep the earlier requested bureau frame unchanged. */
 .home .admissions-band::after,.home .admissions-band::before{content:none!important;display:none!important;border:0!important;background:none!important;box-shadow:none!important}
 .home .home-public{padding-inline:clamp(24px,6vw,100px)}
+
+/* ===== FIB Olymp | cohesive editorial update ===== */
+/* Shared soft top atmosphere; content remains black and unobstructed. */
+.inner-layout .subpage{background:radial-gradient(ellipse 68% 330px at 82% 0,rgba(185,137,81,.075),transparent 78%) no-repeat,linear-gradient(#0b0c0d,#0b0c0d);}
+.inner-layout .inner-heading{padding-top:58px;padding-bottom:42px}
+.inner-layout .inner-heading .eyebrow:empty{display:none!important}
+.inner-layout .inner-heading .eyebrow:empty+h1{margin-top:7px}
+/* Active navigation should retain the same hover aura as inactive items. */
+.nav-link.current::before{display:block!important;opacity:0!important}
+.nav-link.current:hover::before,.nav-link.current:focus-visible::before{display:block!important;opacity:1!important}
+
+/* On the homepage, logo is alongside the restored bureau panel, never behind it. */
+.home .home-leadership{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,385px) 155px;column-gap:clamp(12px,2vw,30px);min-height:370px;align-items:center;overflow:visible}
+.home .home-leadership-left{z-index:1;max-width:670px}
+.home .home-bureau-frame{z-index:1;width:100%;max-width:385px;justify-self:start;padding:27px 25px}
+.home .home-leadership .home-seal{position:relative!important;top:auto!important;right:auto!important;left:auto!important;z-index:0!important;justify-self:center;align-self:center;width:155px!important;min-width:0!important;height:155px!important;opacity:.10!important;filter:grayscale(1);transform:none;animation:fib-seal-drift-side 11s ease-in-out infinite}
+@keyframes fib-seal-drift-side{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-11px) rotate(1deg)}}
+@media(prefers-reduced-motion:reduce){.home .home-leadership .home-seal{animation:none!important}}
+/* Small, useful public links on home — one visually related group, no heavy frame. */
+.home .home-public{gap:clamp(20px,4vw,62px)}
+.home .home-public nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.home .home-public nav a{display:flex;flex-direction:column;justify-content:center;min-height:105px;padding:18px!important;background:#141618!important;border:1px solid transparent!important;border-radius:16px!important;box-shadow:none!important;gap:3px;transition:background .24s ease,transform .24s ease}
+.home .home-public nav a:hover,.home .home-public nav a:focus-visible{background:#202326!important;border-color:rgba(216,181,120,.23)!important;transform:translateY(-2px)}
+.home .home-public nav strong{font-size:clamp(17px,1.35vw,21px)}
+.home .home-public nav span{font-size:12px;margin:0;color:#aaa6a0}
+
+/* Division listing: photo first and concise title, no paragraphs. */
+.units-page .division-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.units-page .division-article{border:0!important;border-radius:19px;overflow:hidden;background:#131516;box-shadow:none;transition:transform .25s ease,background .25s ease}
+.units-page .division-article:hover{transform:translateY(-3px);background:#1a1c1e}
+.units-page .division-picture{aspect-ratio:1.75}
+.units-page .division-info{gap:9px;padding:19px 21px 21px;min-height:145px}
+.units-page .division-info h3{font-size:clamp(22px,2vw,31px);line-height:1.14}
+.units-page .division-cta{font-size:12px;font-weight:800;color:#ddba80;margin-top:auto}
+.units-page .division-cta span{display:inline-block;margin-left:6px;font-size:13px}
+
+/* Individual divisions: no recruitment/rank public notices, no bordered management. */
+.unit-page .unit-feature{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:center;gap:clamp(25px,4vw,58px);padding-top:24px;padding-bottom:48px}
+.unit-page .unit-feature-copy{padding:18px 0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.unit-page .unit-feature-copy h1{font-size:clamp(42px,4.1vw,65px);line-height:1.05;letter-spacing:-.058em;margin:12px 0 19px}
+.unit-page .unit-feature-motto{font-size:16px;margin-bottom:20px}
+.unit-page .unit-feature-intro{font-size:14px;line-height:1.85;margin-bottom:15px}
+.unit-page .unit-feature-more{color:#aaa69f}
+.unit-page .unit-feature-photo{height:390px;min-height:0!important;overflow:hidden;border-radius:20px;box-shadow:none}
+.unit-page .unit-feature-photo img{height:100%;width:100%;object-fit:cover}
+.unit-page .unit-editorial{grid-template-columns:minmax(0,1fr) 245px;gap:60px;padding-top:25px;padding-bottom:52px}
+.unit-page .unit-story h2{font-size:clamp(31px,3vw,43px);margin:13px 0 24px}
+.unit-page .unit-responsibilities{gap:14px}
+.unit-page .unit-responsibilities li{font-size:15px;line-height:1.65;padding-left:19px}
+.unit-page .unit-responsibilities li::before{top:.69em;width:6px;height:6px}
+.unit-page .unit-management{display:flex;flex-direction:column;gap:26px;padding:35px 0 0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.unit-page .unit-management>div,.unit-page .unit-management>div:first-of-type{padding:0!important;border:0!important;display:grid;gap:7px}
+.unit-page .unit-management small{font-size:10px;letter-spacing:.14em}
+.unit-page .unit-management strong{font-size:19px;font-weight:800}
+.unit-page .unit-gallery{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:45px;align-items:center;padding-top:18px;padding-bottom:115px}
+.unit-page .unit-gallery-copy h2{font-size:clamp(30px,3vw,42px);margin:14px 0 13px}
+.unit-page .unit-gallery-copy p{max-width:440px;color:#ada9a3;font-size:14px;line-height:1.75}
+.unit-page .unit-gallery-photo{height:240px;overflow:hidden;border-radius:17px;background:#121416}
+.unit-page .unit-gallery-photo img{width:100%;height:100%;object-fit:cover}
+
+/* Bureau: tall slim position cards; only silhouette/seal, name, role. */
+.bureau-page .leadership-tree{max-width:980px;gap:20px}
+.bureau-page .leader-row{max-width:710px;gap:14px}
+.bureau-page .head-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.bureau-page .leader-card,.bureau-page .head-row .leader-card,.bureau-page .leader-card-director{display:flex!important;flex-direction:column!important;align-items:flex-start!important;min-height:280px!important;padding:12px!important;gap:13px!important;border-radius:17px!important;background:#181a1c!important;box-shadow:none!important;border:0!important;text-align:left!important;transition:background .22s ease,transform .22s ease!important}
+.bureau-page .leader-card:hover,.bureau-page .leader-card:focus-visible{background:#242628!important;transform:translateY(-3px)!important}
+.bureau-page .leader-director .leader-card{width:min(232px,100%)!important;min-height:292px!important}
+.bureau-page .leader-portrait,.bureau-page .head-row .leader-portrait,.bureau-page .leader-card-director .leader-portrait{width:100%!important;min-width:0!important;max-width:none!important;height:160px!important;min-height:160px!important;max-height:160px!important;aspect-ratio:auto!important;display:grid!important;place-items:center!important;border-radius:12px!important;background:radial-gradient(circle at 50% 46%,#24231c,#111315 68%)!important;border:0!important;padding:0!important}
+.bureau-page .leader-portrait img{width:85px!important;height:85px!important;max-width:85px!important;max-height:85px!important;opacity:.88}
+.bureau-page .leader-copy{padding:2px 6px 8px;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:8px!important}
+.bureau-page .leader-card strong{font-size:clamp(16px,1.45vw,22px)!important;line-height:1.25!important;overflow-wrap:anywhere}
+.bureau-page .leader-card .leader-role{font-size:11px!important;line-height:1.55!important;color:#d7b47e!important;text-transform:none!important;letter-spacing:0!important;font-weight:700}
+.bureau-page .leader-open,.bureau-page .leader-card small{display:none!important}
+.bureau-page .tree-tier-caption{margin:13px 0 0}
+
+/* News and documents: a lone central icon and content; no framed placeholder or related links. */
+.news-page .news-reference-links,.documents-page .news-reference-links{display:none!important}
+.news-page .news-main-content,.documents-page .documents-main-content{padding-top:0;padding-bottom:114px}
+.news-page .news-empty-state,.documents-page .news-empty-state{background:transparent!important;box-shadow:none!important;min-height:178px;gap:9px;padding:16px 20px 18px}
+.news-page .news-state-icon,.documents-page .news-state-icon{width:46px!important;height:46px!important;min-width:46px!important;max-width:46px!important;min-height:46px!important;max-height:46px!important;border:0!important;background:transparent!important;color:#deb879!important;filter:drop-shadow(0 0 9px rgba(216,181,120,.42)) drop-shadow(0 0 20px rgba(216,181,120,.13))}
+.news-page .news-state-icon svg,.documents-page .news-state-icon svg{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;max-width:29px!important;max-height:29px!important}
+.documents-page .record-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:13px}
+.documents-page .record-card{display:flex;align-items:flex-start;gap:13px;padding:22px 18px!important;min-height:105px;border:0!important;border-radius:15px!important;background:#141618!important;transition:background .2s ease,transform .2s ease}
+.documents-page .record-card:hover,.documents-page .record-card:focus-visible{background:#212326!important;transform:translateY(-2px)}
+.documents-page .record-card-icon{flex:none;width:26px!important;height:27px!important;min-width:26px!important;min-height:27px!important}
+.documents-page .record-card-icon svg{width:22px!important;height:22px!important}
+.documents-page .record-card-body{display:block;flex:1;min-width:0}
+.documents-page .record-card h3{font-size:clamp(17px,1.45vw,22px);line-height:1.35;margin:0 0 8px}
+.documents-page .record-card p{font-size:12px;line-height:1.5}
+.documents-page .record-open{font-size:18px;color:#d8b578;align-self:center}
+
+/* Academy journey: sequential timeline + two clearly separated transfer levels. */
+.academy-page .training-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:31px 23px;list-style:none;margin:0;padding:0;counter-reset:stage}
+.academy-page .training-stage{position:relative;min-height:165px;padding:0 12px 17px 0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.academy-page .training-stage::before{content:"";position:absolute;top:22px;left:55px;right:0;height:1px;background:linear-gradient(90deg,rgba(216,181,120,.4),rgba(216,181,120,.10))}
+.academy-page .training-step{display:grid;place-items:center;width:45px;height:45px;background:#211f1a;color:#dfb97b;border:1px solid rgba(216,181,120,.18);border-radius:50%;font-size:13px;font-weight:800;letter-spacing:.03em}
+.academy-page .training-stage h3{font-size:19px;margin:20px 0 8px}
+.academy-page .training-stage p{font-size:13px;line-height:1.6;color:#b4b1ab}
+.academy-page .training-requirements .interior-section-head h2{font-size:clamp(30px,3vw,43px)}
+.academy-page .requirement-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.academy-page .rank-entry{display:flex;gap:22px;align-items:flex-start;min-height:172px;padding:26px 27px;background:#151719;border-radius:18px}
+.academy-page .rank-entry-number{font-size:clamp(39px,4vw,57px);line-height:1;font-weight:800;letter-spacing:-.08em;color:#dbb678;min-width:65px}
+.academy-page .rank-entry-content{display:grid;gap:7px;padding-top:2px}
+.academy-page .rank-entry-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:#aa987d}
+.academy-page .rank-entry h3{font-size:24px;letter-spacing:-.04em;line-height:1.16}
+.academy-page .rank-entry p{font-size:14px;color:#e0d7c9}
+.academy-page .rank-entry small{font-size:12px;color:#a9a69f;line-height:1.5}
+
+/* Contacts as actual action buttons, not database-style listings. */
+.contacts-page .rich-contacts{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.contacts-page .contact-card{display:flex;align-items:center;gap:13px;min-height:88px;padding:17px 18px!important;border:1px solid transparent!important;border-radius:15px!important;background:#16181a!important;box-shadow:none!important;transition:transform .22s ease,background .22s ease!important}
+.contacts-page a.contact-card-linked:hover,.contacts-page a.contact-card-linked:focus-visible{transform:translateY(-2px)!important;background:#27292b!important;border-color:rgba(216,181,120,.23)!important}
+.contacts-page .contact-card-muted{opacity:.68;background:#111315!important;cursor:default}
+.contacts-page .contact-card-icon{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;flex:none}
+.contacts-page .contact-card-icon img,.contacts-page .contact-card-icon svg{width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;max-width:24px!important;max-height:24px!important}
+.contacts-page .contact-card-copy{display:flex!important;flex-direction:column;gap:3px!important;min-width:0;flex:1}
+.contacts-page .contact-card-copy strong{font-family:var(--font-display);font-size:17px;line-height:1.25;font-weight:800;color:#f2ece2}
+.contacts-page .contact-card-copy small{font-size:11px;line-height:1.35;color:#b6ad9f}
+.contacts-page .contact-arrow{flex:none;color:#deb97d;font-size:18px;line-height:1}
+
+@media(max-width:1150px){
+ .home .home-leadership{grid-template-columns:minmax(0,1fr) minmax(240px,380px);gap:28px}
+ .home .home-leadership .home-seal{grid-column:2;grid-row:2;width:110px!important;height:110px!important;margin-top:-15px}
+ .contacts-page .rich-contacts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:850px){
+ .home .home-leadership{grid-template-columns:1fr!important;row-gap:18px}
+ .home .home-bureau-frame{grid-column:1;grid-row:2;justify-self:start}
+ .home .home-leadership .home-seal{grid-column:1;grid-row:3;justify-self:end;margin-top:-128px;margin-right:0;width:115px!important;height:115px!important;opacity:.07!important}
+ .unit-page .unit-feature,.unit-page .unit-editorial,.unit-page .unit-gallery{grid-template-columns:1fr;gap:25px}
+ .unit-page .unit-management{display:grid;grid-template-columns:repeat(2,1fr);padding-top:0!important}
+ .unit-page .unit-feature-photo{height:310px}
+ .unit-page .unit-gallery-photo{height:225px}
+ .bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .academy-page .training-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .academy-page .requirement-pair{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ .home .home-public nav{grid-template-columns:1fr;gap:10px}
+ .home .home-public nav a{min-height:88px}
+ .home .home-leadership .home-seal{margin:0!important;grid-row:3;justify-self:center;width:135px!important;height:135px!important;opacity:.07!important}
+ .units-page .division-grid,.documents-page .record-list,.contacts-page .rich-contacts{grid-template-columns:1fr}
+ .units-page .division-picture{aspect-ratio:1.5}
+ .unit-page .unit-feature-copy h1{font-size:clamp(36px,9vw,55px)}
+ .unit-page .unit-feature-photo{height:260px}
+ .unit-page .unit-management{grid-template-columns:1fr;gap:15px}
+ .unit-page .unit-gallery{padding-bottom:85px}
+ .bureau-page .leader-row,.bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .bureau-page .leader-card,.bureau-page .head-row .leader-card{padding:10px!important;min-height:230px!important}
+ .bureau-page .leader-portrait,.bureau-page .head-row .leader-portrait{height:118px!important;min-height:118px!important;max-height:118px!important}
+ .bureau-page .leader-portrait img{width:66px!important;height:66px!important}
+ .academy-page .training-grid{grid-template-columns:1fr;gap:18px}
+ .academy-page .training-stage{padding:0 0 19px 62px!important;min-height:105px}
+ .academy-page .training-step{position:absolute;left:0;top:0}
+ .academy-page .training-stage::before{top:51px;bottom:-21px;left:22px;right:auto;width:1px;height:auto;background:linear-gradient(180deg,rgba(216,181,120,.4),rgba(216,181,120,.10))}
+ .academy-page .training-stage:last-child::before{display:none}
+ .academy-page .training-stage h3{margin:1px 0 5px}
+ .academy-page .rank-entry{padding:22px 19px;gap:15px}
+}
+/* Explicit row layout: override legacy column-oriented contact card component. */
+.contacts-page .rich-contacts .contact-card{flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;text-align:left!important}
+.contacts-page .rich-contacts .contact-card-icon{align-self:center!important}
+.contacts-page .rich-contacts .contact-card-copy{text-align:left!important;align-self:center!important}
+.contacts-page .rich-contacts .contact-arrow{align-self:center!important;margin-left:auto}
