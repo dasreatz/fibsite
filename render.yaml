@@ -1,0 +1,11 @@
+# Optional Render Blueprint for a new Web Service.
+# Existing manually created services still need Settings -> Build & Deploy updated.
+services:
+  - type: web
+    name: fib-olymp-site
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeployTrigger: commit
