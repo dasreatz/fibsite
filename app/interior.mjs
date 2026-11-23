@@ -1,3 +1,6 @@
+import { existsSync, readdirSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { join, resolve } from "node:path";
 import {units,leadership,documentPosts,external,ranks,unitEntry} from './content.mjs';
 
 const esc = v => String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
@@ -14,6 +17,33 @@ export const unitNames={
 const take = (a,lg) => a?.[lg==='en'?1:lg==='de'?2:0]||'';
 const unitLabel=(u,lg)=>take(unitNames[u.id].full,lg);
 const unitAbbr=(u,lg)=>lg==='uk'?u.name:take(({csoa:['ЦСО «А»','SOC “A”','SEZ „A“'],dkb:['ДКБ','CSD','ACS'],gsu:['ГСУ','MID','HED'],gur:['ГУР','Intelligence','Aufklärung']})[u.id],lg);
+// Optional future gallery images: add JPG/PNG/WebP/AVIF files to
+// assets/units/gallery/<unit-id>/ and rebuild. No templates need editing.
+const galleryRoot=resolve(fileURLToPath(new URL('../assets/units/gallery/',import.meta.url)));
+// Optional RP character portraits. Keep source image files unchanged.
+// Supported: assets/people/director.(webp/png/jpg/jpeg/avif)
+//            assets/people/csoa-head.(webp/png/jpg/jpeg/avif)
+const peopleRoot=resolve(fileURLToPath(new URL('../assets/people/',import.meta.url)));
+function portraitPath(stem){
+ for(const ext of ['webp','png','jpg','jpeg','avif']){
+  if(existsSync(join(peopleRoot,`${stem}.${ext}`))) return `/assets/people/${stem}.${ext}`;
+ }
+ return null;
+}
+
+function unitGalleryImages(id){
+ const images=[`/assets/units/${id}.webp`,`/assets/units/details/${id}.webp`];
+ if(id==='csoa') images.push('/assets/hero-csoa.webp');
+ const directory=join(galleryRoot,id);
+ if(existsSync(directory)){
+  const files=readdirSync(directory,{withFileTypes:true})
+    .filter(entry=>entry.isFile()&&/\.(webp|jpe?g|png|avif)$/i.test(entry.name))
+    .map(entry=>entry.name).sort((a,b)=>a.localeCompare(b,'uk',{numeric:true}));
+  for(const name of files) images.push(`/assets/units/gallery/${id}/${encodeURIComponent(name)}`);
+ }
+ return [...new Set(images)];
+}
+
 
 
 export function renderInterior(slug, locale='uk') {
@@ -42,9 +72,13 @@ export function renderInterior(slug, locale='uk') {
  if(slug==='bureau'){
   const director=leadership.director;
   const people=[
-   {id:'director',name:director.name,title:t('Директор FIB Olymp','Director, FIB Olymp','Direktor, FIB Olymp'),unit:t('Керівництво бюро · ЦСО «А»','Bureau leadership · SOC “A”','Behördenleitung · SEZ „A“'),nationality:t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'),age:t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'),status:t('На посаді','In office','Im Amt'),career:t('Колишній директор FIB та губернатор штату Olymp. Повернувся до керівництва бюро.','Previously served as FIB director and governor of the state of Olymp. Returned to lead the bureau.','War zuvor Direktor des FIB und Gouverneur des Staates Olymp. Kehrte an die Spitze der Behörde zurück.'),biography:t('Kai Muerte — директор Федерального бюро розслідувань штату Olymp. Відомий вимогливим підходом до службової дисципліни, відповідальності та результатів роботи. Одночасно здійснює керівництво Центром спеціальних операцій «А».','Kai Muerte serves as Director of the Federal Investigation Bureau in the state of Olymp. He is known for demanding standards of discipline, accountability and results. He also leads Special Operations Center “A”.','Kai Muerte ist Direktor des Federal Investigation Bureau im Staat Olymp. Er ist für hohe Ansprüche an Disziplin, Verantwortungsbewusstsein und Arbeitsergebnisse bekannt. Gleichzeitig führt er das Zentrum für Spezialeinsätze „A“.')}
+   {id:'director',name:director.name,title:t('Директор FIB Olymp','Director, FIB Olymp','Direktor, FIB Olymp'),unit:t('Керівництво бюро · ЦСО «А»','Bureau leadership · SOC “A”','Behördenleitung · SEZ „A“'),photo:portraitPath('director'),nationality:t('Українець','Ukrainian','Ukrainer'),age:t('19 років','19 years','19 Jahre'),status:t('На посаді','In office','Im Amt'),career:t('Народився в Україні. Після переїзду до штату Olymp вступив до FIB, очолив ЦСО «А». Раніше був директором бюро та губернатором штату; тепер повернувся до керівництва FIB.','Born in Ukraine. After moving to Olymp, joined FIB and later led SOC “A”. Previously served as bureau director and state governor before returning to head FIB.','In der Ukraine geboren. Nach dem Umzug nach Olymp trat er dem FIB bei und leitete später die SEZ „A“. Er war bereits FIB-Direktor und Gouverneur, bevor er zur Behördenleitung zurückkehrte.'),biography:t(director.bio,'Kai Muerte grew up in Ukraine, where he learned early to take responsibility for his decisions. At nineteen, he believes leadership is earned through action rather than titles. After moving to the state of Olymp he joined FIB, beginning with training and hands-on work alongside more experienced colleagues. He later became involved with Special Operations Center “A”, learning to lead a team and take responsibility for others. Having previously served as FIB director and governor of Olymp, Kai returned to lead the Bureau while remaining in charge of SOC “A”. He values honesty, independent thinking and the ability to finish what one starts.','Kai Muerte wuchs in der Ukraine auf und lernte früh, Verantwortung für seine Entscheidungen zu übernehmen. Mit neunzehn Jahren glaubt er, dass sich Führung durch Handeln statt durch Titel beweist. Nach seinem Umzug in den Staat Olymp trat er dem FIB bei. Seine Laufbahn begann mit Ausbildung und Zusammenarbeit mit erfahrenen Kollegen. Später übernahm er Aufgaben bei der SEZ „A“ und lernte, für sein Team einzustehen. Nach früheren Amtszeiten als FIB-Direktor und Gouverneur von Olymp kehrte Kai an die Spitze der Behörde zurück und führt weiterhin die SEZ „A“. Er legt Wert auf Ehrlichkeit, Eigenständigkeit und Konsequenz.')}
+
   ];
-  const card=(id,label,name,sub='',large=false)=>`<button type="button" class="leader-card profile-trigger${large?' leader-card-director':''}" data-person="${esc(id)}" aria-haspopup="dialog" aria-label="${esc(label+': '+name)}"><span class="leader-portrait"><img src="/assets/fib-seal.webp" alt="" loading="lazy"></span><span class="leader-copy"><strong>${esc(name)}</strong><span class="leader-role">${esc(label)}</span></span></button>`;
+  const card=(id,label,name,sub='',large=false)=>{
+   const photo=id==='director'?portraitPath('director'):id==='head-csoa'?portraitPath('csoa-head'):null;
+   return `<button type="button" class="leader-card profile-trigger${large?' leader-card-director':''}" data-person="${esc(id)}" aria-haspopup="dialog" aria-label="${esc(label+': '+name)}"><span class="leader-portrait${photo?' has-photo':''}"><img src="${esc(photo||'/assets/fib-seal.webp')}" alt="" loading="lazy"></span><span class="leader-copy"><strong>${esc(name)}</strong><span class="leader-role">${esc(label)}</span></span></button>`;
+  };
   const deputies=leadership.deputies.map((d,i)=>{
    const id='deputy-'+i;
    people.push({id,name:d.name||t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'),title:t(d.title,i===0?'First Deputy Director':'Deputy Director',i===0?'Erster stellvertretender Direktor':'Stellvertretender Direktor')});
@@ -53,7 +87,7 @@ export function renderInterior(slug, locale='uk') {
   const heads=units.map(u=>{
    const id='head-'+u.id;
    const name=u.head||t('Не оприлюднено','Not disclosed','Nicht veröffentlicht');
-   people.push({id,name,title:unitLabel(u,locale),unit:unitLabel(u,locale)});
+   people.push({id,name,title:unitLabel(u,locale),unit:unitLabel(u,locale),...(u.id==='csoa'?{photo:portraitPath('csoa-head'),nationality:people[0].nationality,age:people[0].age,status:people[0].status,career:people[0].career,biography:people[0].biography}:{})});
    return `<div class="tree-node">${card(id,t('Керівник ','Head of ','Leitung: ')+unitAbbr(u,locale),name)}</div>`;
   }).join('');
   const json=JSON.stringify(people).replaceAll('<','\\u003c').replaceAll('>','\\u003e').replaceAll('&','\\u0026');
@@ -103,14 +137,15 @@ export function renderInterior(slug, locale='uk') {
       <div class="unit-feature-photo"><img src="/assets/units/${id}.webp" alt="${esc(unitLabel(u,locale))}" loading="eager"></div>
     </section>
     <section class="page-wrap unit-editorial"><div class="unit-story"><span class="eyebrow">${t('Напрям роботи','Area of work','Arbeitsbereich')}</span><h2>${t('Основні <em>завдання</em>','Primary <em>responsibilities</em>','Zentrale <em>Aufgaben</em>')}</h2><ul class="unit-responsibilities">${points}</ul></div>
-      <aside class="unit-management"><div><small>${t('Керівник','Head','Leitung')}</small><strong>${esc(u.head||t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'))}</strong></div><div><small>${t('Заступник','Deputy','Stellvertretung')}</small><strong>${esc(u.deputy||t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'))}</strong></div></aside>
+      <aside class="unit-management">${id==='csoa'&&portraitPath('csoa-head')?`<img class="unit-leader-portrait" src="${esc(portraitPath('csoa-head'))}" alt="${t('Керівник ЦСО «А»','Head of SOC “A”','Leiter der SEZ „A“')}" loading="lazy">`:''}<div><small>${t('Керівник','Head','Leitung')}</small><strong>${esc(u.head||t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'))}</strong></div><div><small>${t('Заступник','Deputy','Stellvertretung')}</small><strong>${esc(u.deputy||t('Не оприлюднено','Not disclosed','Nicht veröffentlicht'))}</strong></div></aside>
     </section>
-    <section class="page-wrap unit-about"><div class="unit-about-copy"><span class="eyebrow">${t('Про підрозділ','About the division','Über die Abteilung')}</span><h2>${t('Робота, що має <em>значення.</em>','Work that <em>matters.</em>','Arbeit mit <em>Verantwortung.</em>')}</h2><p>${esc(extra[0])}</p><p>${esc(extra[1])}</p></div>
+    <section class="page-wrap unit-about"><div class="unit-about-copy"><span class="eyebrow">${t('Про підрозділ','About the division','Über die Abteilung')}</span><h2>${t('Про роботу <em>підрозділу</em>','About the <em>division</em>','Über die <em>Abteilung</em>')}</h2><p>${esc(extra[0])}</p><p>${esc(extra[1])}</p></div>
+      <div class="unit-gallery-wrap"><span class="eyebrow">${t('Фотографії підрозділу','Division photographs','Bilder der Abteilung')}</span>
       <div class="unit-photo-gallery" aria-label="${t('Фотографії підрозділу','Division photographs','Bilder der Abteilung')}">
-        <figure><img src="/assets/units/details/${id}.webp" alt="${esc(unitLabel(u,locale))}" loading="lazy"></figure>
-        <figure><img src="/assets/units/${id}.webp" alt="${esc(unitLabel(u,locale))}" loading="lazy"></figure>
-      </div>
+        ${unitGalleryImages(id).map((src,index)=>`<a class="unit-gallery-thumb" href="${esc(src)}" data-gallery-index="${index}" aria-label="${t('Відкрити фотографію','Open image','Bild öffnen')} ${index+1}"><img src="${esc(src)}" alt="${esc(unitLabel(u,locale))} — ${index+1}" loading="lazy"></a>`).join('')}
+      </div><p class="unit-gallery-hint">${t('Натисніть на фото, щоб переглянути галерею.','Select an image to browse the gallery.','Wählen Sie ein Bild, um die Galerie zu öffnen.')}</p></div>
     </section>
+    <dialog class="unit-gallery-dialog" id="unit-gallery-dialog" aria-label="${t('Перегляд фото підрозділу','Division photo viewer','Fotogalerie der Abteilung')}"><div class="unit-gallery-viewer"><button type="button" class="gallery-close" aria-label="${t('Закрити','Close','Schließen')}">×</button><button type="button" class="gallery-nav gallery-prev" aria-label="${t('Попереднє фото','Previous photo','Vorheriges Bild')}">‹</button><img class="gallery-large-image" alt="${esc(unitLabel(u,locale))}"><button type="button" class="gallery-nav gallery-next" aria-label="${t('Наступне фото','Next photo','Nächstes Bild')}">›</button><span class="gallery-counter" aria-live="polite"></span></div></dialog>
   </main>`;
  }
  if(slug==='news'){

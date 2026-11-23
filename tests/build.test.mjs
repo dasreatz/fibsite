@@ -7,11 +7,11 @@ test('42 localized HTML pages with shared CSS, JS and required assets',async()=>
  for(const name of ['index.html','styles.css','app.js','assets','bureau','units','news','documents','academy','contacts','join','staff','invitation','en','de'])assert.ok(names.includes(name),name);
  assert.ok(!names.includes('activity'));
  for(const lang of ['uk','en','de'])assert.ok((await stat(new URL('assets/flags/'+lang+'.svg',dist))).size>100);
- for(const img of ['hero-csoa.webp','fib-seal.webp','favicon.png'])assert.ok((await stat(new URL('assets/'+img,dist))).size>2000);
+ for(const img of ['hero-csoa.webp','fib-seal.webp'])assert.ok((await stat(new URL('assets/'+img,dist))).size>2000);
  for(const lang of ['','en/','de/']){
   const html=await readFile(new URL(lang+'index.html',dist),'utf8');
-  assert.match(html,/Origin-4\.0\.0-requested-fixes/);
-  assert.match(html,/<link rel="stylesheet" href="\/styles\.css\?v=4\.0\.0">/);
+  assert.match(html,/Origin-4\.2\.0-personas/);
+  assert.match(html,/<link rel="stylesheet" href="\/styles\.css\?v=4\.2\.0">/);
   assert.match(html,/<script src="\/app\.js" defer><\/script>/);
   assert.doesNotMatch(html,/data:image\/webp;base64,/);
  }

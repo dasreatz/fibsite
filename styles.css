@@ -1152,19 +1152,19 @@
 /* FIB Olymp — final focused corrections. Explicit selectors are intentional: they
    resolve older component styles without changing recruitment or server UI. */
 /* Distinct dedicated space for the animated seal: it never overlays the text box. */
-.home .home-leadership{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(300px,390px) 174px!important;gap:22px!important;align-items:center!important;overflow:visible!important;position:relative!important}
+.home .home-leadership{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(290px,380px) minmax(235px,285px)!important;gap:22px!important;align-items:center!important;overflow:visible!important;position:relative!important}
 .home .home-leadership-left{grid-column:1!important;grid-row:1!important;position:relative;z-index:1}
 .home .home-bureau-frame{grid-column:2!important;grid-row:1!important;position:relative!important;z-index:1!important;max-width:390px!important;margin:0!important}
-.home .home-leadership .home-seal{grid-column:3!important;grid-row:1!important;position:relative!important;inset:auto!important;z-index:0!important;width:174px!important;height:174px!important;min-width:174px!important;justify-self:center!important;align-self:center!important;margin:0!important;opacity:.18!important;filter:grayscale(.55)!important;transform-origin:center!important;animation:fib-seal-drift-side 11s ease-in-out infinite!important;pointer-events:none}
+.home .home-leadership .home-seal{grid-column:3!important;grid-row:1!important;position:relative!important;inset:auto!important;z-index:0!important;width:clamp(235px,19.5vw,285px)!important;height:clamp(235px,19.5vw,285px)!important;min-width:235px!important;justify-self:center!important;align-self:center!important;margin:0!important;opacity:.28!important;filter:grayscale(.22)!important;transform-origin:center!important;animation:fib-seal-drift-side 11s ease-in-out infinite!important;pointer-events:none}
 @media(max-width:1200px){
  .home .home-leadership{grid-template-columns:minmax(0,1fr) minmax(250px,380px)!important;gap:24px!important}
- .home .home-leadership .home-seal{grid-column:2!important;grid-row:2!important;justify-self:end!important;margin:0!important;width:130px!important;min-width:130px!important;height:130px!important}
+ .home .home-leadership .home-seal{grid-column:2!important;grid-row:2!important;justify-self:end!important;margin:0!important;width:200px!important;min-width:200px!important;height:200px!important}
 }
 @media(max-width:760px){
  .home .home-leadership{grid-template-columns:minmax(0,1fr)!important;gap:22px!important}
  .home .home-leadership-left{grid-column:1!important;grid-row:1!important}
  .home .home-bureau-frame{grid-column:1!important;grid-row:2!important;justify-self:stretch!important}
- .home .home-leadership .home-seal{grid-column:1!important;grid-row:3!important;justify-self:center!important;margin:4px 0 0!important;width:136px!important;min-width:136px!important;height:136px!important}
+ .home .home-leadership .home-seal{grid-column:1!important;grid-row:3!important;justify-self:center!important;margin:4px 0 0!important;width:205px!important;min-width:205px!important;height:205px!important}
 }
 @media(prefers-reduced-motion:reduce){.home .home-leadership .home-seal{animation:none!important}}
 
@@ -1218,18 +1218,18 @@
 .unit-page .unit-about{display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);align-items:start;gap:clamp(30px,4vw,56px);padding-top:25px;padding-bottom:110px}
 .unit-page .unit-about-copy h2{font-size:clamp(31px,3vw,44px);margin:15px 0 22px}
 .unit-page .unit-about-copy p{font-size:15px;line-height:1.84;color:#c2bdb5;max-width:680px;margin:0 0 18px}
-.unit-page .unit-photo-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;align-self:center}
-.unit-page .unit-photo-gallery figure{margin:0;min-width:0;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#141619}
-.unit-page .unit-photo-gallery img{height:100%;width:100%;object-fit:cover;display:block}
+.unit-page .unit-photo-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;align-self:center}
+.unit-page .unit-photo-gallery .unit-gallery-thumb{position:relative;display:block;min-width:0;aspect-ratio:4/5;border-radius:12px;overflow:hidden;background:#141619;cursor:zoom-in;outline-offset:3px;transition:transform .3s ease,box-shadow .3s ease}
+.unit-page .unit-photo-gallery img{height:100%;width:100%;object-fit:cover;display:block;transition:transform .4s ease}
 .unit-page .unit-management{align-self:start!important;gap:20px!important;padding:16px 0 0!important;background:transparent!important;border:0!important;box-shadow:none!important}
 .unit-page .unit-management strong{font-size:18px!important}
 @media(max-width:850px){
  .unit-page .unit-feature,.unit-page .unit-editorial,.unit-page .unit-about{grid-template-columns:1fr!important;gap:24px!important}
  .unit-page .unit-feature-photo{height:270px!important;max-height:270px!important}
  .unit-page .unit-management{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:0!important}
- .unit-page .unit-photo-gallery figure{aspect-ratio:1.45}
+ .unit-page .unit-photo-gallery .unit-gallery-thumb{aspect-ratio:1.45}
 }
-@media(max-width:540px){.unit-page .unit-management{grid-template-columns:1fr!important}.unit-page .unit-photo-gallery{gap:8px}.unit-page .unit-photo-gallery figure{aspect-ratio:1.05}}
+@media(max-width:540px){.unit-page .unit-management{grid-template-columns:1fr!important}.unit-page .unit-photo-gallery{gap:8px}.unit-page .unit-photo-gallery .unit-gallery-thumb{aspect-ratio:1.05}}
 
 /* Exactly one academy step numeral, with connecting line and no browser markers. */
 .academy-page .training-grid{list-style:none!important;counter-reset:none!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important}
@@ -1261,3 +1261,68 @@
 .contacts-page .rich-contacts .contact-card-copy small{font-size:10px!important;line-height:1.35!important}
 @media(max-width:960px){.contacts-page .rich-contacts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:580px){.contacts-page .rich-contacts{grid-template-columns:1fr!important}}
+
+/* v4.1 — quiet cinematic atmosphere. Sparse, non-interactive and reduced-motion aware. */
+.ambient-fall{position:fixed;inset:0;z-index:50;width:100vw;height:100vh;pointer-events:none!important;user-select:none;opacity:.82;contain:strict}
+@media(prefers-reduced-motion:reduce){.ambient-fall{display:none!important}}
+
+/* Larger bureau seal in its own grid column; never covers the information card. */
+@media(min-width:1201px){
+ .home .home-leadership{min-height:420px!important}
+}
+@media(max-width:1200px){.home .home-leadership .home-seal{opacity:.25!important}}
+@media(max-width:760px){.home .home-leadership .home-seal{opacity:.24!important}}
+
+/* Remove the sharp warm-to-black edge between the last section and the footer. */
+.home .home-end{background:radial-gradient(ellipse 62% 72% at 50% 36%,rgba(169,126,65,.072) 0%,rgba(119,93,58,.027) 46%,transparent 87%),linear-gradient(#0b0c0d,#0b0c0d)!important}
+.home-layout .site-footer{background:#0b0c0d!important;border-top:0!important}
+
+/* Predictable SVG chevron in the language selector, rather than a font-dependent glyph. */
+.language-chevron{display:inline-grid;place-items:center;width:20px;height:20px;flex:none}
+.language-chevron svg{width:18px;height:18px;display:block}
+
+/* News: clear title hierarchy without an oversized masthead. */
+.news-page .inner-heading h1{font-size:clamp(42px,4.55vw,67px)!important;line-height:1.1!important}
+.news-page .news-empty-state h2{font-size:clamp(39px,4.1vw,59px)!important;line-height:1.12!important}
+.news-page .news-main-content{padding-top:0!important}
+
+/* Documents: small readable linked rows, not two enormous slabs. */
+.documents-page .record-list{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:9px!important;width:min(100%,790px)!important;margin:12px auto 0!important}
+.documents-page .record-card{min-height:70px!important;padding:13px 15px!important;gap:12px!important;align-items:center!important;background:rgba(25,27,28,.7)!important;border:1px solid rgba(215,174,108,.11)!important;border-radius:11px!important;box-shadow:none!important;transform:none!important}
+.documents-page .record-card:hover,.documents-page .record-card:focus-visible{background:#202224!important;border-color:rgba(216,181,120,.36)!important;transform:translateY(-1px)!important}
+.documents-page .record-card-icon{width:24px!important;height:24px!important;min-width:24px!important;min-height:24px!important;align-self:center!important}
+.documents-page .record-card-icon svg{width:19px!important;height:19px!important}
+.documents-page .record-card h3{font-size:clamp(15px,1.23vw,18px)!important;line-height:1.27!important;margin:0 0 4px!important}
+.documents-page .record-card p{font-size:11px!important;line-height:1.45!important}
+.documents-page .record-open{font-size:16px!important;flex:none}
+
+/* Expandable photo gallery; thumbnails never grow into full-page banners. */
+.unit-page .unit-gallery-wrap{min-width:0;align-self:start}
+.unit-page .unit-gallery-wrap>.eyebrow{display:block;margin-bottom:12px}
+.unit-page .unit-photo-gallery .unit-gallery-thumb:hover,.unit-page .unit-photo-gallery .unit-gallery-thumb:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(223,183,116,.52)}
+.unit-page .unit-photo-gallery .unit-gallery-thumb:hover img{transform:scale(1.04)}
+.unit-page .unit-gallery-hint{font-size:12px;color:#9e9b96;margin-top:12px;line-height:1.55}
+.unit-gallery-dialog{position:fixed;inset:0;margin:auto;max-width:min(96vw,1080px);max-height:94dvh;width:100%;padding:0;border:1px solid rgba(224,187,121,.25);border-radius:16px;background:#0d0f11;color:#f5eee4;overflow:visible;box-shadow:0 24px 90px rgba(0,0,0,.78)}
+.unit-gallery-dialog::backdrop{background:rgba(0,0,0,.88);backdrop-filter:blur(7px)}
+.unit-gallery-viewer{position:relative;display:grid;place-items:center;min-height:min(68vh,620px);padding:44px 65px 38px}
+.unit-gallery-viewer .gallery-large-image{max-width:100%;max-height:min(78dvh,740px);width:auto;height:auto;object-fit:contain;border-radius:6px}
+.unit-gallery-dialog button{display:grid;place-items:center;position:absolute;z-index:2;border:0;border-radius:999px;background:rgba(28,30,32,.88);color:#eed2a4;font-size:29px;line-height:1;transition:background .2s ease}
+.unit-gallery-dialog button:hover,.unit-gallery-dialog button:focus-visible{background:#3a3329}
+.unit-gallery-dialog .gallery-close{top:8px;right:9px;width:36px;height:36px;font-size:25px}
+.unit-gallery-dialog .gallery-nav{top:50%;transform:translateY(-50%);width:42px;height:52px}
+.unit-gallery-dialog .gallery-prev{left:9px}.unit-gallery-dialog .gallery-next{right:9px}
+.unit-gallery-dialog .gallery-counter{position:absolute;bottom:11px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.08em;color:#c6b79e}
+@media(max-width:620px){.unit-gallery-viewer{min-height:50vh;padding:45px 45px 38px}.unit-gallery-dialog .gallery-nav{width:33px;height:43px}.unit-gallery-dialog .gallery-prev{left:4px}.unit-gallery-dialog .gallery-next{right:4px}}
+
+/* Slightly more structured rails: connectors always align with the card centers. */
+.bureau-page .leader-row::before,.bureau-page .head-row::before{height:1px!important;opacity:.78!important}
+.bureau-page .tree-node::before{width:1px!important;opacity:.78!important}
+.bureau-page .tree-stem{width:1px!important}
+
+/* Optional provided portraits replace the FIB placeholder only for named staff. */
+.bureau-page .leader-portrait.has-photo{overflow:hidden!important;background:#17191b!important;padding:0!important}
+.bureau-page .leader-portrait.has-photo img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:50% 28%!important;opacity:1!important}
+.profile-portrait.has-photo{overflow:hidden;padding:0!important;background:#17191b!important}
+.profile-portrait.has-photo img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:50% 28%}
+.unit-page .unit-leader-portrait{width:min(100%,190px);height:190px;object-fit:cover;object-position:50% 25%;border-radius:12px;display:block;margin-bottom:5px}
+.profile-dialog .profile-paragraph+.profile-paragraph{margin-top:11px}
