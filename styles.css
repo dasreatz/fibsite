@@ -1326,3 +1326,125 @@
 .profile-portrait.has-photo img{width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:50% 28%}
 .unit-page .unit-leader-portrait{width:min(100%,190px);height:190px;object-fit:cover;object-position:50% 25%;border-radius:12px;display:block;margin-bottom:5px}
 .profile-dialog .profile-paragraph+.profile-paragraph{margin-top:11px}
+
+/* ================================================================
+   FIB OLYMP 5.0 | final design alignment and functional galleries
+   Scope is intentional: leave approved Contacts and Join pages intact.
+   ================================================================ */
+/* New shared FIB seal is installed at /assets/fib-seal.webp, including favicon. */
+.home .home-leadership{
+  display:grid!important;
+  grid-template-columns:minmax(0,1.3fr) minmax(290px,.8fr)!important;
+  gap:clamp(25px,4vw,65px)!important;
+  align-items:center!important;
+  min-height:420px!important;
+  padding-top:72px!important;padding-bottom:88px!important;
+  position:relative!important;isolation:isolate!important;
+  overflow:hidden!important;
+}
+.home .home-leadership-left{grid-column:1!important;grid-row:1!important;position:relative!important;z-index:2!important}
+.home .home-bureau-frame{grid-column:2!important;grid-row:1!important;position:relative!important;z-index:2!important;max-width:440px!important;justify-self:end!important}
+.home .home-leadership .home-seal{
+  position:absolute!important;inset:auto!important;top:50%!important;right:0!important;
+  display:block!important;grid-column:auto!important;grid-row:auto!important;
+  width:min(55vw,680px)!important;height:min(55vw,680px)!important;
+  min-width:0!important;margin:0!important;
+  justify-self:auto!important;align-self:auto!important;
+  background:url('/assets/fib-seal.webp') center/contain no-repeat!important;
+  z-index:0!important;opacity:.13!important;filter:saturate(.78)!important;
+  animation:fib-seal-watermark-float 11s ease-in-out infinite!important;
+  will-change:transform;pointer-events:none!important;
+}
+@keyframes fib-seal-watermark-float{
+  0%,100%{transform:translateY(-50%) rotate(-1deg)}
+  50%{transform:translateY(calc(-50% - 11px)) rotate(1deg)}
+}
+/* Fade the background photograph into the next dark section, never a hard stripe. */
+.home .hero{background:#0b0c0d!important}
+.home .hero-picture{mask-image:linear-gradient(to bottom,#000 0%,#000 58%,rgba(0,0,0,.92) 70%,rgba(0,0,0,.48) 88%,transparent 100%)!important}
+.home .hero-shade{mask-image:none!important;background:linear-gradient(90deg,rgba(4,5,6,.16),rgba(4,5,6,.17) 42%,rgba(4,5,6,.59) 75%,rgba(4,5,6,.82)),linear-gradient(180deg,rgba(5,6,7,.16),transparent 36%,rgba(9,10,11,.45) 73%,#0b0c0d 100%)!important}
+.home .hero-actions{justify-content:center!important;gap:12px!important}
+.home .hero-actions .action-button{min-width:205px;min-height:46px!important;padding:10px 19px!important;border-radius:11px!important}
+.home .hero-actions .action-button.ghost{background:rgba(12,14,15,.2)!important;color:#efe2d0!important;border:1px solid rgba(230,195,144,.6)!important;backdrop-filter:blur(6px)}
+.home .hero-actions .action-button.ghost:hover,.home .hero-actions .action-button.ghost:focus-visible{background:rgba(216,181,120,.14)!important;border-color:#e4c18c!important}
+.home-end .lift-links .text-link{display:inline-flex;justify-content:center;min-width:205px;min-height:44px;padding:9px 19px;border:1px solid rgba(216,181,120,.33);border-radius:11px;background:rgba(255,255,255,.025);transform:none;text-decoration:none}
+.home-end .lift-links .text-link:hover,.home-end .lift-links .text-link:focus-visible{border-color:rgba(216,181,120,.75);background:rgba(216,181,120,.08);transform:translateY(-2px)}
+@media(max-width:1090px){.home .home-leadership{grid-template-columns:minmax(0,1fr) minmax(250px,.8fr)!important;gap:24px!important}.home .home-leadership .home-seal{width:min(63vw,560px)!important;height:min(63vw,560px)!important;right:-15px!important;opacity:.105!important}}
+@media(max-width:760px){
+ .home .home-leadership{grid-template-columns:minmax(0,1fr)!important;min-height:0!important;padding-top:50px!important;padding-bottom:65px!important}
+ .home .home-leadership-left{grid-column:1!important;grid-row:1!important}
+ .home .home-bureau-frame{grid-column:1!important;grid-row:2!important;justify-self:start!important;max-width:510px!important}
+ .home .home-leadership .home-seal{top:53%!important;right:-19vw!important;width:88vw!important;height:88vw!important;opacity:.09!important;grid-column:auto!important;grid-row:auto!important}
+ .home .hero-actions{justify-content:flex-start!important}
+ .home .hero-actions .action-button{min-width:0;flex:1 1 170px}
+}
+@media(prefers-reduced-motion:reduce){.home .home-leadership .home-seal{animation:none!important;transform:translateY(-50%)!important}}
+
+/* A single centered line at each tree level, calculated from real grid gaps. */
+.bureau-page .leadership-tree{width:100%;max-width:1060px!important;gap:0!important;margin-inline:auto!important}
+.bureau-page .leader-director{display:flex!important;justify-content:center!important;align-self:center!important}
+.bureau-page .tree-stem{width:1px!important;height:45px!important;background:rgba(215,180,115,.72)!important;opacity:1!important;margin:0 auto!important}
+.bureau-page .leader-row,.bureau-page .head-row{display:grid!important;position:relative!important;gap:18px!important;margin:18px auto 0!important;width:100%!important}
+.bureau-page .leader-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;max-width:850px!important}
+.bureau-page .head-row{grid-template-columns:repeat(4,minmax(0,1fr))!important;max-width:1060px!important}
+.bureau-page .leader-row::before,.bureau-page .head-row::before{content:''!important;display:block!important;position:absolute!important;height:1px!important;top:-18px!important;opacity:1!important;background:rgba(215,180,115,.72)!important;pointer-events:none!important}
+.bureau-page .leader-row::before{left:calc((100% - 36px) / 6)!important;right:calc((100% - 36px) / 6)!important}
+.bureau-page .head-row::before{left:calc((100% - 54px) / 8)!important;right:calc((100% - 54px) / 8)!important}
+.bureau-page .tree-node::before{content:''!important;display:block!important;position:absolute!important;top:-18px!important;left:50%!important;width:1px!important;height:18px!important;background:rgba(215,180,115,.72)!important;opacity:1!important;pointer-events:none!important}
+.bureau-page .tree-stem-secondary{height:40px!important}
+.bureau-page .tree-tier-caption{position:relative!important;min-height:30px!important;margin:0 auto!important;display:flex!important;align-items:center!important;justify-content:center!important;isolation:isolate}
+.bureau-page .tree-tier-caption::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:1px;background:rgba(215,180,115,.72);z-index:-1}
+.bureau-page .tree-tier-caption{background:#0b0c0d;padding:0 14px!important}
+.bureau-page .leader-card[data-person="head-csoa"] .leader-portrait.has-photo img{object-position:34% 50%!important}
+.unit-page .unit-leader-portrait{object-position:34% 50%!important}
+@media(max-width:900px) and (min-width:681px){
+ .bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;max-width:670px!important}
+ .bureau-page .head-row::before{left:calc((100% - 18px) / 4)!important;right:calc((100% - 18px) / 4)!important}
+}
+@media(max-width:680px){
+ .bureau-page .leader-row{grid-template-columns:minmax(0,1fr)!important;max-width:270px!important;gap:16px!important}
+ .bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .bureau-page .leader-row::before,.bureau-page .head-row::before,.bureau-page .tree-node::before{display:none!important}
+ .bureau-page .tree-stem{height:29px!important}
+ .bureau-page .tree-stem-secondary{height:29px!important}
+ .bureau-page .tree-tier-caption::before{display:none!important}
+}
+
+/* Six compact previews are shown on the division page; ALL photos remain in the viewer. */
+.unit-page .unit-photo-gallery{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important;align-items:start!important}
+.unit-page .unit-photo-gallery .unit-gallery-thumb{display:block!important;aspect-ratio:4/3!important;border:0!important;padding:0!important;border-radius:10px!important;background:#1b1d1f!important;overflow:hidden!important;position:relative!important;cursor:zoom-in!important}
+.unit-page .unit-photo-gallery .unit-gallery-thumb:nth-child(n+7){display:none!important}
+.unit-page .unit-photo-gallery .unit-gallery-thumb img{display:block!important;width:100%!important;height:100%!important;object-fit:cover!important}
+.unit-page .unit-gallery-more{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.60);color:#f7e5c7;font-size:27px;font-weight:800}
+.unit-page .unit-photo-gallery .unit-gallery-thumb:focus-visible{outline:2px solid #e1bc82;outline-offset:3px}
+@media(max-width:580px){.unit-page .unit-photo-gallery{gap:7px!important}.unit-page .unit-photo-gallery .unit-gallery-thumb{aspect-ratio:1/1!important}}
+
+/* Accessible lightbox: navigable arrows, close button and a scrolling thumbnail strip. */
+.unit-gallery-dialog{width:min(95vw,1140px)!important;max-width:none!important;max-height:95dvh!important;padding:0!important;overflow:hidden!important;border-radius:15px!important}
+.unit-gallery-viewer{min-height:0!important;height:min(68dvh,690px)!important;padding:40px 65px 40px!important}
+.unit-gallery-viewer .gallery-large-image{display:block!important;max-width:100%!important;max-height:calc(min(68dvh,690px) - 78px)!important;width:auto!important;height:auto!important;object-fit:contain!important}
+.unit-gallery-dialog .gallery-nav{top:50%!important;transform:translateY(-50%)!important;width:44px!important;height:53px!important}
+.unit-gallery-dialog .gallery-prev{left:12px!important}.unit-gallery-dialog .gallery-next{right:12px!important}
+.unit-gallery-dialog .gallery-close{top:9px!important;right:10px!important;width:38px!important;height:38px!important}
+.unit-gallery-dialog .gallery-strip{display:flex;gap:9px;align-items:center;justify-content:flex-start;overflow-x:auto;scrollbar-width:thin;padding:12px 19px 14px;background:#121416;border-top:1px solid rgba(216,181,120,.12)}
+.unit-gallery-dialog .gallery-strip-thumb{display:block!important;position:relative!important;z-index:auto!important;flex:0 0 80px!important;width:80px!important;height:61px!important;min-width:80px!important;padding:0!important;border:2px solid transparent!important;border-radius:8px!important;overflow:hidden!important;transform:none!important;background:#232426!important;cursor:pointer!important;transition:border-color .2s ease,opacity .2s ease!important;opacity:.65}
+.unit-gallery-dialog .gallery-strip-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.unit-gallery-dialog .gallery-strip-thumb[aria-current="true"]{border-color:#d8b578!important;opacity:1}
+.unit-gallery-dialog .gallery-strip-thumb:hover,.unit-gallery-dialog .gallery-strip-thumb:focus-visible{opacity:1;outline-offset:2px}
+@media(max-width:620px){.unit-gallery-dialog{width:98vw!important}.unit-gallery-viewer{height:min(64dvh,550px)!important;padding:44px 43px 38px!important}.unit-gallery-viewer .gallery-large-image{max-height:calc(min(64dvh,550px) - 78px)!important}.unit-gallery-dialog .gallery-prev{left:2px!important}.unit-gallery-dialog .gallery-next{right:2px!important}.unit-gallery-dialog .gallery-strip-thumb{width:66px!important;height:53px!important;min-width:66px!important;flex-basis:66px!important}}
+
+/* Documents: two restrained links side by side instead of wide dark slabs. */
+.documents-page .record-list{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:min(100%,850px)!important;gap:13px!important;margin:15px 0 0!important}
+.documents-page .record-card{min-height:75px!important;padding:13px 15px!important;gap:12px!important;background:rgba(22,24,25,.55)!important;border:1px solid rgba(216,181,120,.10)!important;border-radius:11px!important}
+.documents-page .record-card h3{font-size:clamp(14px,1.14vw,17px)!important;line-height:1.34!important;margin:0 0 4px!important}
+.documents-page .record-card p{font-size:11px!important;line-height:1.4!important}
+.documents-page .record-card-icon{width:20px!important;min-width:20px!important;height:22px!important;min-height:22px!important}
+.documents-page .record-card-icon svg{width:17px!important;height:17px!important}
+@media(max-width:710px){.documents-page .record-list{grid-template-columns:1fr!important;max-width:530px!important}}
+
+/* Sparse optional falling motes; never capture clicks or cover the hero photograph. */
+.ambient-fall{pointer-events:none!important;z-index:5!important;opacity:.7!important}
+@media(prefers-reduced-motion:reduce){.ambient-fall{display:none!important}}
+
+/* The four-division overview stays a single row on laptop widths too. */
+@media(min-width:900px){.home .unit-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}

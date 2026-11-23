@@ -119,58 +119,7 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   document.addEventListener('mouseout', event => { if (!event.relatedTarget) hide(); });
 })();
 
-// The homepage keeps a restrained atmospheric dust animation near the photograph.
-(() => {
-  const hero = document.querySelector('.hero');
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (!hero || reducedMotion.matches) return;
-
-  const canvas = document.createElement('canvas');
-  canvas.className = 'gold-dust';
-  canvas.setAttribute('aria-hidden', 'true');
-  hero.appendChild(canvas);
-  const ctx = canvas.getContext('2d', {alpha: true});
-  if (!ctx) { canvas.remove(); return; }
-  let width=0,height=0,ratio=1,particles=[],frame=0,then=0;
-  const rnd=(lo,hi)=>lo+Math.random()*(hi-lo);
-  const particle=(startAnywhere=false)=>({
-    x:rnd(0,width),y:startAnywhere?rnd(0,height):rnd(-30,-3),
-    radius:rnd(.45,1.05),speed:rnd(7,15),drift:rnd(2,7),
-    phase:rnd(0,Math.PI*2),alpha:rnd(.10,.25)
-  });
-  function resize(){
-    width=hero.clientWidth;height=hero.clientHeight;
-    ratio=Math.min(window.devicePixelRatio||1,1.5);
-    canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);
-    ctx.setTransform(ratio,0,0,ratio,0,0);
-    particles=Array.from({length:Math.min(18,Math.max(7,Math.round(width*height/105000)))},()=>particle(true));
-  }
-  function draw(time){
-    frame=0;
-    if (document.hidden||reducedMotion.matches) return;
-    const dt=Math.min((time-then)/1000,.06);
-    if(dt<1/28){frame=requestAnimationFrame(draw);return;}
-    then=time;
-    ctx.clearRect(0,0,width,height);
-    for(const p of particles){
-      p.y+=p.speed*dt;
-      if(p.y>height+10) Object.assign(p,particle());
-      const x=p.x+Math.sin(time*.0004+p.phase)*p.drift;
-      ctx.beginPath();ctx.fillStyle=`rgba(233,183,107,${p.alpha})`;
-      ctx.arc(x,p.y,p.radius,0,2*Math.PI);ctx.fill();
-    }
-    frame=requestAnimationFrame(draw);
-  }
-  resize();window.addEventListener('resize',resize,{passive:true});
-  document.addEventListener('visibilitychange',()=>{
-    if(!document.hidden&&!frame&&!reducedMotion.matches){then=performance.now();frame=requestAnimationFrame(draw);}
-  });
-  reducedMotion.addEventListener('change',()=>{
-    if(reducedMotion.matches){cancelAnimationFrame(frame);frame=0;canvas.style.display='none';}
-    else{canvas.style.display='';then=performance.now();if(!frame)frame=requestAnimationFrame(draw);}
-  });
-  frame=requestAnimationFrame(draw);
-})();
+// No particles are rendered on the main hero photograph.
 
 // Fine-pointer gold reflection on dark homepage panels.
 (() => {
@@ -401,6 +350,11 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   if(elapsed<1/30){frame=requestAnimationFrame(draw);return;}
   last=time;
   ctx.clearRect(0,0,width,height);
+  // The homepage cover photo stays completely clear; show only on dark sections.
+  const hero=document.querySelector('.home .hero');
+  if(hero&&hero.getBoundingClientRect().bottom>0){
+   frame=requestAnimationFrame(draw);return;
+  }
   for(const p of motes){
    p.y+=p.speed*elapsed;
    if(p.y>height+3)Object.assign(p,reset(true));
@@ -424,23 +378,33 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
  const gallery=document.querySelector('.unit-photo-gallery');
  const dialog=document.getElementById('unit-gallery-dialog');
  if(!gallery||!dialog||typeof dialog.showModal!=='function')return;
- const links=[...gallery.querySelectorAll('a.unit-gallery-thumb')];
- if(!links.length)return;
+ const buttons=[...gallery.querySelectorAll('button.unit-gallery-thumb')];
+ if(!buttons.length)return;
  const image=dialog.querySelector('.gallery-large-image');
  const counter=dialog.querySelector('.gallery-counter');
+ const strip=dialog.querySelector('.gallery-strip');
  let position=0,touchStartX=null;
  function show(index){
-  position=(index+links.length)%links.length;
-  const link=links[position];
-  image.src=link.href;
-  image.alt=link.querySelector('img')?.alt||'';
-  counter.textContent=`${position+1} / ${links.length}`;
+  position=(index+buttons.length)%buttons.length;
+  const source=buttons[position];
+  image.src=source.dataset.gallerySrc;
+  image.alt=source.querySelector('img')?.alt||'';
+  counter.textContent=`${position+1} / ${buttons.length}`;
+  [...strip.children].forEach((thumb,i)=>{
+   thumb.setAttribute('aria-current',String(i===position));
+   if(i===position) thumb.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
+  });
  }
  function close(){dialog.close();}
- links.forEach((link,index)=>link.addEventListener('click',event=>{
-  if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
-  event.preventDefault();show(index);dialog.showModal();
- }));
+ buttons.forEach((button,index)=>{
+  const thumb=document.createElement('button');
+  thumb.type='button';thumb.className='gallery-strip-thumb';
+  thumb.setAttribute('aria-label',button.getAttribute('aria-label')||String(index+1));
+  const small=document.createElement('img');small.src=button.dataset.gallerySrc;small.alt='';small.loading='lazy';
+  thumb.appendChild(small);strip.appendChild(thumb);
+  thumb.addEventListener('click',()=>show(index));
+  button.addEventListener('click',()=>{show(index);dialog.showModal();});
+ });
  dialog.querySelector('.gallery-close').addEventListener('click',close);
  dialog.querySelector('.gallery-prev').addEventListener('click',()=>show(position-1));
  dialog.querySelector('.gallery-next').addEventListener('click',()=>show(position+1));

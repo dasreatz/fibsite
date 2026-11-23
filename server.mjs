@@ -6,7 +6,7 @@ import {createRecruitmentApi} from './lib/recruitment.mjs';
 import {pages,units} from './app/content.mjs';
 const root=resolve(fileURLToPath(new URL('./dist/',import.meta.url)));
 const port=Number(process.env.PORT||3000);
-const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.pdf':'application/pdf','.svg':'image/svg+xml'};
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.avif':'image/avif','.webp':'image/webp','.pdf':'application/pdf','.svg':'image/svg+xml'};
 const routes=['',...Object.keys(pages),...units.map(u=>`units/${u.id}`)];
 const htmlNames=new Set([...routes,...['en','de'].flatMap(lang=>routes.map(slug=>[lang,slug].filter(Boolean).join('/')))]);
 const recruitment=await createRecruitmentApi(process.env);
