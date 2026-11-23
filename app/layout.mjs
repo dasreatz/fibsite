@@ -11,11 +11,6 @@ const textLink = (label,url,cls='') => `<a class="text-link ${esc(cls)}" href="$
 const linkButton = (label,url,cls='') => `<a class="action-button ${esc(cls)}" href="${esc(url)}">${esc(label)}</a>`;
 const regionTitle = (label,title) => `<div class="section-title">${eyebrow(label)}<h2>${title}</h2></div>`;
 
-const inlineIcon = kind => ({
-  news:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18a2 2 0 0 1 2 2v10.5A3.5 3.5 0 0 1 16.5 19H7.5A3.5 3.5 0 0 1 4 15.5V5.5Zm3-.5v10.5A1.5 1.5 0 0 0 8.5 17H16V5H7Zm3 3h5.5v1.5H10V8Zm0 3h5.5v1.5H10V11Zm0 3h3.5v1.5H10V14ZM7.75 8.1h1.1v1.1h-1.1V8.1Zm0 3h1.1v1.1h-1.1v-1.1Zm0 3h1.1v1.1h-1.1v-1.1Z" fill="currentColor"/></svg>`,
-  document:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7.8L20 8.2V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 1.8V9h4.2L14 4.8ZM9 11h6v1.5H9V11Zm0 3.5h6v1.5H9v-1.5Zm0-7h3v1.5H9V7.5Z" fill="currentColor"/></svg>`
-}[kind] || '');
-
 function header(active='') {
   const titles={ '':['Home','Startseite'],'bureau':['About','Über uns'],'units':['Divisions','Abteilungen'],'news':['News','Nachrichten'],'documents':['Documents','Dokumente'],'academy':['Academy','Akademie'],'contacts':['Contacts','Kontakt'],'join':['Join','Bewerbung']};
   const translateLabel=(n)=>activeLocale==='uk'?n.label:titles[n.slug][activeLocale==='en'?0:1];
@@ -44,7 +39,7 @@ function home(){
 <section class="home-leadership page-wrap" aria-labelledby="home-bureau-title"><div class="home-leadership-left">${eyebrow('Про бюро')}<h2 id="home-bureau-title">Сильна структура.<br><em>Спільна<br>відповідальність.</em></h2></div><aside class="home-bureau-frame"><p>FIB Olymp об’єднує різні напрями роботи в одну систему. Тут цінують точність рішень, дисципліну та взаємодію між підрозділами.</p>${textLink('Докладніше про бюро','/bureau/','underlined')}</aside><div class="home-seal" aria-hidden="true"></div></section>
 <section class="home-divisions"><div class="page-wrap"><div class="section-heading-row">${regionTitle('Структура бюро','Чотири підрозділи.<br><em>Одна служба.</em>')}<p>Кожен напрям має свою спеціалізацію. Натисни на фотографію, щоб дізнатися більше.</p></div>${unitCards()}</div></section>
 <section class="home-academy page-wrap"><div class="home-academy-photo"><img src="/assets/academy.webp" alt="Співробітники FIB" loading="lazy"></div><div class="home-academy-copy">${eyebrow('Академія FIB')}<h2>Спочатку підготовка.<br><em>Потім служба.</em></h2><p>Вступ — це лише початок. Нові співробітники проходять навчання, знайомляться зі структурою та правилами взаємодії.</p>${textLink('Про навчання в Академії','/academy/','underlined')}</div></section>
-<section class="home-public page-wrap"><div>${eyebrow('Публічна інформація')}<h2>Новини й <em>документи.</em></h2><p>Тут з’являтимуться тільки офіційно оприлюднені матеріали. Службовий архів не є частиною публічного сайту.</p></div><nav aria-label="Публічні розділи"><a class="public-card public-card-news" href="/news/"><span class="public-card-icon">${inlineIcon('news')}</span><div><strong>Новини бюро</strong><span>Оголошення та повідомлення</span></div></a><a class="public-card public-card-docs" href="/documents/"><span class="public-card-icon">${inlineIcon('document')}</span><div><strong>Відкриті документи</strong><span>Публічний архів</span></div></a></nav></section>
+<section class="home-public page-wrap"><div>${eyebrow('Публічна інформація')}<h2>Новини й <em>документи.</em></h2><p>Тут з’являтимуться тільки офіційно оприлюднені матеріали. Службовий архів не є частиною публічного сайту.</p></div><nav aria-label="Публічні розділи"><a href="/news/"><strong>Новини бюро</strong><span>Оголошення та повідомлення</span></a><a href="/documents/"><strong>Відкриті документи</strong><span>Публічний архів</span></a></nav></section>
 <section class="home-end"><div class="page-wrap">${eyebrow('Підготовка та служба')}<h2>Твій наступний крок<br><em>починається тут.</em></h2><p>Усі потрібні відомості про вступ і навчання зібрані в окремих розділах.</p><div class="lift-links">${textLink('Про порядок вступу','/join/')}${textLink('Академія FIB','/academy/')}</div></div></section>
 </main>`;
 }

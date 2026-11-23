@@ -882,3 +882,93 @@
  .bureau-page .leader-card,.bureau-page .leader-card-director{min-height:unset}
  .unit-page .unit-feature-copy,.unit-page .unit-management,.unit-page .unit-selection,.join-page .recruitment-main,.join-page .aside-panel{padding:24px}
 }
+
+/* ===== 3.8 corrections: fixed-size iconography and borderless compact editorial layout ===== */
+/* Front page: text-only public links, no added symbols or heavy frames. */
+.home .home-public{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:center;gap:clamp(35px,6vw,90px);padding-top:62px;padding-bottom:95px}
+.home .home-public nav{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:22px}
+.home .home-public nav a{display:flex;flex-direction:column;justify-content:center;gap:7px;min-height:100px;padding:15px 0 18px;background:transparent!important;border:0!important;border-bottom:1px solid rgba(216,181,120,.21)!important;border-radius:0!important;box-shadow:none!important;transform:none}
+.home .home-public nav a:hover,.home .home-public nav a:focus-visible{background:transparent!important;border-bottom-color:#d8b578!important;transform:none}
+.home .home-public nav strong{font-family:var(--font-display);font-size:clamp(19px,1.55vw,23px);color:#f5f1ec;line-height:1.28;letter-spacing:-.025em}
+.home .home-public nav span{font-size:12px;color:#aaa6a0;line-height:1.4}
+.home .admissions-band{background:#0b0c0d;box-shadow:none;border:none;border-radius:0;padding-top:60px;padding-bottom:63px;margin:0}
+.home .admissions-band-action{padding:0;background:transparent;border:none;border-radius:0;box-shadow:none}
+.home .unit-item{border-radius:17px;box-shadow:none}
+.home .unit-photo{aspect-ratio:1.25}
+.home .unit-body{padding:18px 19px 22px;gap:6px}
+.home .unit-body h3{font-size:25px}
+.home .home-academy-photo{border-radius:16px;box-shadow:none}
+
+/* News and documents: short, centered placeholders with a soft icon glow only. */
+.news-page .news-main-content,.documents-page .documents-main-content{padding-top:0;padding-bottom:92px;gap:22px}
+.news-page .news-empty-state,.documents-page .news-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:195px;padding:17px 20px 30px;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;gap:10px;text-align:center}
+.news-page .news-empty-state h2,.documents-page .news-empty-state h2{font-size:clamp(29px,3vw,42px);line-height:1.12;margin:8px 0 0}
+.news-page .news-empty-state p,.documents-page .news-empty-state p{font-size:13px;max-width:560px;line-height:1.65;color:#b6b1aa}
+.news-page .news-empty-state .news-state-icon,.documents-page .news-empty-state .news-state-icon{position:relative;display:flex;align-items:center;justify-content:center;flex:none;width:52px!important;height:52px!important;min-width:52px!important;min-height:52px!important;max-width:52px!important;max-height:52px!important;padding:0!important;border-radius:0!important;background:transparent!important;color:#dfbb83;box-shadow:none!important;filter:drop-shadow(0 0 8px rgba(218,178,103,.5)) drop-shadow(0 0 22px rgba(218,178,103,.14))}
+.news-page .news-empty-state .news-state-icon svg,.documents-page .news-empty-state .news-state-icon svg{display:block;width:39px!important;height:39px!important;min-width:39px!important;min-height:39px!important;max-width:39px!important;max-height:39px!important;flex:none}
+.news-page .news-reference-links,.documents-page .news-reference-links{display:flex;flex-wrap:wrap;align-items:center;gap:9px 21px;padding:17px 0;background:transparent!important;border-radius:0!important;box-shadow:none!important;border-top:1px solid rgba(255,255,255,.065)}
+.news-page .news-reference-items,.documents-page .news-reference-items{display:flex;flex-wrap:wrap;gap:10px 22px}
+.news-page .news-reference-items a,.documents-page .news-reference-items a{display:inline-flex;padding:0;border-radius:0;background:none!important;min-height:30px;font-size:12px;font-weight:700;color:#d9b783}
+.documents-page .record-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.documents-page .record-card{display:flex;align-items:flex-start;gap:14px;padding:20px 0;min-height:98px;background:transparent!important;border:0!important;border-bottom:1px solid rgba(216,181,120,.2)!important;border-radius:0!important;box-shadow:none!important;transition:color .25s ease,border-color .25s ease}
+.documents-page .record-card:hover{border-bottom-color:var(--gold)!important}
+.documents-page .record-card-icon{display:flex;align-items:center;justify-content:center;width:26px!important;height:26px!important;min-width:26px!important;min-height:26px!important;background:none!important;border:none!important;box-shadow:none!important;border-radius:0!important;color:#d8b578}
+.documents-page .record-card-icon svg{display:block;width:21px!important;height:21px!important;max-width:21px!important;max-height:21px!important}
+.documents-page .record-card h3{font-size:clamp(19px,1.6vw,24px);margin:5px 0 8px;line-height:1.3}
+.documents-page .record-card p{font-size:13px;line-height:1.6}
+.documents-page .record-meta{font-size:10px;color:#d9b783;letter-spacing:.08em;text-transform:uppercase}
+.documents-page .record-footnote{font-size:12px}
+
+/* Contacts: authentic brand logos, 24px, no giant placeholder illustrations. */
+.contacts-page .contact-section{padding-top:0;padding-bottom:100px}
+.contacts-page .rich-contacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 36px}
+.contacts-page .contact-card{display:flex;align-items:flex-start;gap:16px;min-height:112px;padding:18px 0 21px;background:transparent!important;border:0!important;border-bottom:1px solid rgba(216,181,120,.17)!important;border-radius:0!important;box-shadow:none!important;transition:border-color .25s ease,transform .2s ease}
+.contacts-page .contact-card:hover,.contacts-page .contact-card:focus-visible{transform:none;border-bottom-color:rgba(216,181,120,.5)!important}
+.contacts-page .contact-card-icon{display:flex;align-items:center;justify-content:center;flex:none;width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;max-width:30px!important;max-height:30px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:#e1bc82}
+.contacts-page .contact-card-icon svg,.contacts-page .contact-card-icon img{display:block;width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important;object-fit:contain}
+.contacts-page .contact-card-icon img{filter:invert(85%) sepia(13%) saturate(1000%) hue-rotate(349deg) brightness(99%)}
+.contacts-page .contact-card-copy{gap:5px}
+.contacts-page .contact-card-tag{font-size:9px;letter-spacing:.13em;color:#bc9d6e}
+.contacts-page .contact-card h3{font-size:clamp(20px,1.5vw,26px);margin:0}
+.contacts-page .contact-card p{font-size:13px;color:#b1ada7;line-height:1.6}
+.contacts-page .contact-card-state{background:transparent!important;border-radius:0!important;color:#ae9a78;font-size:11px;padding:3px 0;margin:0}
+
+/* Leadership: vertical, tidy dossier cards; no repeated gold outlines. */
+.bureau-page .leadership-tree{gap:19px;max-width:1050px}
+.bureau-page .leader-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;max-width:780px;margin-inline:auto;width:100%}
+.bureau-page .head-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.bureau-page .leader-card,.bureau-page .head-row .leader-card,.bureau-page .leader-card-director{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:10px;min-width:0!important;max-width:none;min-height:225px!important;padding:18px 17px!important;background:#17191a!important;border:0!important;border-radius:16px!important;box-shadow:none!important;transform:none!important;text-align:left!important}
+.bureau-page .leader-director .leader-card{width:min(260px,100%)!important;min-height:245px!important}
+.bureau-page .leader-card:hover,.bureau-page .leader-card:focus-visible{background:#1f2223!important}
+.bureau-page .leader-card::after{display:none!important}
+.bureau-page .leader-portrait,.bureau-page .head-row .leader-portrait,.bureau-page .leader-card-director .leader-portrait{display:flex!important;align-items:center!important;justify-content:center!important;flex:none!important;width:65px!important;height:65px!important;min-width:65px!important;min-height:65px!important;max-width:65px!important;max-height:65px!important;aspect-ratio:1!important;padding:6px!important;background:rgba(216,181,120,.035)!important;border:0!important;border-radius:12px!important}
+.bureau-page .leader-portrait img{display:block;width:45px!important;height:45px!important;max-width:45px!important;max-height:45px!important;object-fit:contain}
+.bureau-page .leader-copy{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important;min-width:0}
+.bureau-page .leader-role{padding:0!important;background:transparent!important;font-size:10px!important;letter-spacing:.05em!important;color:#d5b078}
+.bureau-page .leader-card strong,.bureau-page .leader-card-director strong,.bureau-page .head-row .leader-card strong{font-size:clamp(16px,1.4vw,22px)!important;line-height:1.28!important;margin:0!important;color:#f2ede6!important}
+.bureau-page .leader-card small{font-size:11px!important;line-height:1.45!important;margin:0!important;color:#a9a49e}
+.bureau-page .leader-open{font-size:11px!important;margin-top:6px!important;color:#dabc86}
+.bureau-page .tree-stem{height:24px}
+.bureau-page .tree-tier-caption{font-size:10px}
+
+@media(max-width:1050px){
+ .home .home-public{grid-template-columns:1fr;gap:22px}
+ .bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr));max-width:700px;margin-inline:auto}
+ .documents-page .record-list{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+ .home .home-public nav{grid-template-columns:1fr;gap:0}
+ .contacts-page .rich-contacts{grid-template-columns:1fr}
+ .bureau-page .leader-row{grid-template-columns:1fr 1fr}
+ .bureau-page .head-row{grid-template-columns:1fr 1fr}
+ .bureau-page .leader-card,.bureau-page .head-row .leader-card{min-height:205px!important;padding:14px!important}
+ .home .admissions-band{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+}
+@media(max-width:420px){
+ .bureau-page .leader-row,.bureau-page .head-row{grid-template-columns:1fr 1fr}
+ .bureau-page .leader-card,.bureau-page .head-row .leader-card{min-height:225px!important}
+ .bureau-page .leader-portrait{width:55px!important;height:55px!important;min-width:55px!important;min-height:55px!important}
+}
+/* Remove legacy gradient outline on the entry banner; keep the earlier requested bureau frame unchanged. */
+.home .admissions-band::after,.home .admissions-band::before{content:none!important;display:none!important;border:0!important;background:none!important;box-shadow:none!important}
+.home .home-public{padding-inline:clamp(24px,6vw,100px)}
