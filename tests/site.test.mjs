@@ -184,7 +184,9 @@ test('public individual division pages hide selection details, but academy discl
  assert.match(academy,/Senior Agent/);
  assert.match(academy,/class="rank-entry-number">04/);
  assert.match(academy,/class="rank-entry-number">03/);
- assert.match(academy,/<ol class="training-grid"/);
+ assert.match(academy,/<div class="training-grid" role="list">/);
+ assert.equal((academy.match(/class="training-stage" role="listitem"/g)||[]).length,6);
+ assert.doesNotMatch(academy,/<ol class="training-grid"/);
 });
 
 test('compact public placeholders and contacts have no oversized decorative icons or fake social links',()=>{

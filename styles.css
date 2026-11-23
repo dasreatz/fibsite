@@ -1136,3 +1136,128 @@
 .contacts-page .rich-contacts .contact-card-icon{align-self:center!important}
 .contacts-page .rich-contacts .contact-card-copy{text-align:left!important;align-self:center!important}
 .contacts-page .rich-contacts .contact-arrow{align-self:center!important;margin-left:auto}
+
+/* Division listing correction: all FOUR cards in one row on desktop.
+   Hover outline is an overlay, so legacy border resets cannot suppress it. */
+.units-page .division-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.units-page .division-article{position:relative;isolation:isolate;min-width:0;overflow:hidden;border-radius:17px;transition:transform .28s ease,background .28s ease}
+.units-page .division-article::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border:1px solid rgba(230,186,119,.88);box-shadow:inset 0 0 0 1px rgba(230,186,119,.08),0 0 19px rgba(216,181,120,.12);border-radius:inherit;opacity:0;transition:opacity .3s ease}
+.units-page .division-article:hover::after,.units-page .division-article:focus-visible::after{opacity:1}
+.units-page .division-picture{height:auto!important;aspect-ratio:1.21}
+.units-page .division-info{min-height:0!important;padding:17px 17px 20px;gap:7px}
+.units-page .division-info h3{font-size:clamp(18px,1.48vw,23px);line-height:1.22;margin:3px 0 0}
+@media(max-width:800px){.units-page .division-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){.units-page .division-grid{grid-template-columns:1fr}}
+
+/* FIB Olymp — final focused corrections. Explicit selectors are intentional: they
+   resolve older component styles without changing recruitment or server UI. */
+/* Distinct dedicated space for the animated seal: it never overlays the text box. */
+.home .home-leadership{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(300px,390px) 174px!important;gap:22px!important;align-items:center!important;overflow:visible!important;position:relative!important}
+.home .home-leadership-left{grid-column:1!important;grid-row:1!important;position:relative;z-index:1}
+.home .home-bureau-frame{grid-column:2!important;grid-row:1!important;position:relative!important;z-index:1!important;max-width:390px!important;margin:0!important}
+.home .home-leadership .home-seal{grid-column:3!important;grid-row:1!important;position:relative!important;inset:auto!important;z-index:0!important;width:174px!important;height:174px!important;min-width:174px!important;justify-self:center!important;align-self:center!important;margin:0!important;opacity:.18!important;filter:grayscale(.55)!important;transform-origin:center!important;animation:fib-seal-drift-side 11s ease-in-out infinite!important;pointer-events:none}
+@media(max-width:1200px){
+ .home .home-leadership{grid-template-columns:minmax(0,1fr) minmax(250px,380px)!important;gap:24px!important}
+ .home .home-leadership .home-seal{grid-column:2!important;grid-row:2!important;justify-self:end!important;margin:0!important;width:130px!important;min-width:130px!important;height:130px!important}
+}
+@media(max-width:760px){
+ .home .home-leadership{grid-template-columns:minmax(0,1fr)!important;gap:22px!important}
+ .home .home-leadership-left{grid-column:1!important;grid-row:1!important}
+ .home .home-bureau-frame{grid-column:1!important;grid-row:2!important;justify-self:stretch!important}
+ .home .home-leadership .home-seal{grid-column:1!important;grid-row:3!important;justify-self:center!important;margin:4px 0 0!important;width:136px!important;min-width:136px!important;height:136px!important}
+}
+@media(prefers-reduced-motion:reduce){.home .home-leadership .home-seal{animation:none!important}}
+
+/* Tree: real director -> deputies -> division heads, with visible connector rails. */
+.bureau-page .leadership-tree{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important;max-width:1040px!important}
+.bureau-page .leader-director{align-self:center!important;justify-content:center!important}
+.bureau-page .leader-director .leader-card{width:245px!important}
+.bureau-page .tree-stem{display:block!important;align-self:center!important;width:2px!important;height:44px!important;margin:0!important;background:linear-gradient(#d3af75,#8d6e44)!important;opacity:.82!important}
+.bureau-page .leader-row,.bureau-page .head-row{position:relative!important;display:grid!important;width:100%!important;gap:19px!important;margin:20px auto 0!important;max-width:100%!important}
+.bureau-page .leader-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;max-width:840px!important}
+.bureau-page .head-row{grid-template-columns:repeat(4,minmax(0,1fr))!important;max-width:1040px!important}
+.bureau-page .leader-row::before,.bureau-page .head-row::before{content:"";display:block;position:absolute;left:calc(100% / 6);right:calc(100% / 6);top:-20px;height:2px;background:linear-gradient(90deg,#8d6e44,#d4b27a 50%,#8d6e44);opacity:.85;pointer-events:none}
+.bureau-page .head-row::before{left:calc(100% / 8);right:calc(100% / 8)}
+.bureau-page .tree-node{position:relative;min-width:0;display:flex;justify-content:center}
+.bureau-page .tree-node::before{content:"";position:absolute;top:-20px;left:50%;height:20px;width:2px;background:#a78554;opacity:.83;pointer-events:none}
+.bureau-page .tree-node .leader-card{width:100%!important;height:100%!important;min-height:326px!important;max-width:265px!important;padding:13px!important}
+.bureau-page .leader-director .leader-card{min-height:326px!important}
+.bureau-page .leader-portrait,.bureau-page .head-row .leader-portrait,.bureau-page .leader-card-director .leader-portrait{height:192px!important;min-height:192px!important;max-height:192px!important;border-radius:12px!important}
+.bureau-page .leader-card .leader-copy{gap:7px!important;padding:3px 5px 8px!important}
+.bureau-page .leader-card strong{font-size:clamp(16px,1.3vw,20px)!important}
+.bureau-page .leader-card .leader-role{font-size:11px!important;line-height:1.45!important}
+.bureau-page .tree-stem-secondary{height:48px!important;margin-top:0!important}
+.bureau-page .tree-tier-caption{margin:8px auto 12px!important;color:#d8b578}
+@media(max-width:790px){
+ .bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:17px!important}
+ .bureau-page .head-row::before{left:25%;right:25%}
+ .bureau-page .tree-node .leader-card{min-height:292px!important}
+ .bureau-page .leader-portrait,.bureau-page .head-row .leader-portrait{height:156px!important;min-height:156px!important;max-height:156px!important}
+}
+@media(max-width:560px){
+ .bureau-page .leader-row{grid-template-columns:1fr!important;gap:18px!important;max-width:260px!important}
+ .bureau-page .leader-row::before{display:none!important}
+ .bureau-page .leader-row .tree-node::before{left:50%}
+ .bureau-page .head-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+ .bureau-page .head-row .tree-node .leader-card{min-height:230px!important;padding:10px!important}
+ .bureau-page .head-row .leader-portrait{height:118px!important;min-height:118px!important;max-height:118px!important}
+}
+/* Compact four-up division overview with subtle gold hover outline. */
+@media(min-width:801px){.units-page .division-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}}
+.units-page .division-article::after{border:1px solid rgba(230,186,119,.88);opacity:0;transition:opacity .3s ease}
+.units-page .division-article:hover::after,.units-page .division-article:focus-visible::after{opacity:1}
+.units-page .division-info{min-height:0!important;padding:16px!important}
+.units-page .division-info h3{font-size:clamp(17px,1.4vw,23px)!important;line-height:1.25!important}
+@media(max-width:800px){.units-page .division-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:540px){.units-page .division-grid{grid-template-columns:1fr!important}}
+
+/* Editorial division detail: longer narrative, two correctly sized gallery images. */
+.unit-page .unit-feature{grid-template-columns:minmax(0,1fr) minmax(0,.87fr)!important;align-items:center!important;gap:clamp(24px,4vw,58px)!important;padding-bottom:38px!important}
+.unit-page .unit-feature-photo{height:345px!important;max-height:345px!important}
+.unit-page .unit-editorial{grid-template-columns:minmax(0,1fr) 220px!important;gap:50px!important;padding-bottom:42px!important}
+.unit-page .unit-about{display:grid;grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);align-items:start;gap:clamp(30px,4vw,56px);padding-top:25px;padding-bottom:110px}
+.unit-page .unit-about-copy h2{font-size:clamp(31px,3vw,44px);margin:15px 0 22px}
+.unit-page .unit-about-copy p{font-size:15px;line-height:1.84;color:#c2bdb5;max-width:680px;margin:0 0 18px}
+.unit-page .unit-photo-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;align-self:center}
+.unit-page .unit-photo-gallery figure{margin:0;min-width:0;aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:#141619}
+.unit-page .unit-photo-gallery img{height:100%;width:100%;object-fit:cover;display:block}
+.unit-page .unit-management{align-self:start!important;gap:20px!important;padding:16px 0 0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.unit-page .unit-management strong{font-size:18px!important}
+@media(max-width:850px){
+ .unit-page .unit-feature,.unit-page .unit-editorial,.unit-page .unit-about{grid-template-columns:1fr!important;gap:24px!important}
+ .unit-page .unit-feature-photo{height:270px!important;max-height:270px!important}
+ .unit-page .unit-management{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:0!important}
+ .unit-page .unit-photo-gallery figure{aspect-ratio:1.45}
+}
+@media(max-width:540px){.unit-page .unit-management{grid-template-columns:1fr!important}.unit-page .unit-photo-gallery{gap:8px}.unit-page .unit-photo-gallery figure{aspect-ratio:1.05}}
+
+/* Exactly one academy step numeral, with connecting line and no browser markers. */
+.academy-page .training-grid{list-style:none!important;counter-reset:none!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:24px!important}
+.academy-page .training-stage{display:block!important;list-style:none!important;counter-increment:none!important;position:relative!important;padding:0 10px 15px 0!important;background:transparent!important}
+.academy-page .training-stage::marker{content:""!important}
+.academy-page .training-stage::after{content:none!important;display:none!important}
+.academy-page .training-step{font-size:13px!important;font-weight:800!important}
+.academy-page .training-requirements .interior-section-head{max-width:740px;margin-bottom:30px!important}
+.academy-page .training-requirements .interior-section-head h2{line-height:1.15!important;margin-bottom:12px!important}
+.academy-page .requirement-pair{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:22px!important;align-items:stretch}
+.academy-page .rank-entry{display:grid!important;grid-template-columns:60px minmax(0,1fr)!important;gap:22px!important;padding:27px!important;align-items:start!important;min-height:200px!important}
+.academy-page .rank-entry-number{font-size:49px!important;letter-spacing:-.05em}
+.academy-page .rank-entry-content{display:flex!important;flex-direction:column!important;gap:9px!important;min-width:0}
+.academy-page .rank-entry-content h3{font-size:24px!important}
+.academy-page .rank-entry-content p{font-size:15px!important;line-height:1.55!important}
+.academy-page .rank-entry-content small{font-size:12px!important;line-height:1.6!important}
+@media(max-width:860px){.academy-page .training-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.academy-page .requirement-pair{grid-template-columns:1fr!important}}
+@media(max-width:600px){.academy-page .training-grid{grid-template-columns:1fr!important}.academy-page .training-stage{padding:0 0 16px 62px!important}.academy-page .rank-entry{grid-template-columns:52px minmax(0,1fr)!important;gap:15px!important;padding:23px!important}.academy-page .rank-entry-number{font-size:42px!important}}
+
+/* Contacts are buttons, not a directory table. Brand assets are real logos. */
+.contacts-page .rich-contacts{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important}
+.contacts-page .rich-contacts .contact-card{display:flex!important;flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;gap:13px!important;min-height:72px!important;padding:13px 15px!important;border-radius:13px!important;border:1px solid transparent!important;border-bottom:1px solid transparent!important;background:#181a1c!important;text-align:left!important;box-shadow:none!important;transform:none!important}
+.contacts-page .rich-contacts a.contact-card-linked:hover,.contacts-page .rich-contacts a.contact-card-linked:focus-visible{background:#27292b!important;border-color:rgba(216,181,120,.4)!important;transform:translateY(-2px)!important}
+.contacts-page .rich-contacts .contact-card-muted{opacity:.66!important;cursor:default!important;background:#131517!important}
+.contacts-page .rich-contacts .contact-card-icon{display:grid!important;place-items:center!important;width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;max-width:29px!important;max-height:29px!important}
+.contacts-page .rich-contacts .contact-card-icon img,.contacts-page .rich-contacts .contact-card-icon svg{width:23px!important;height:23px!important;max-width:23px!important;max-height:23px!important}
+.contacts-page .rich-contacts .contact-card-copy{display:flex!important;flex-direction:column!important;align-self:center!important;gap:2px!important}
+.contacts-page .rich-contacts .contact-card-copy strong{font-size:16px!important}
+.contacts-page .rich-contacts .contact-card-copy small{font-size:10px!important;line-height:1.35!important}
+@media(max-width:960px){.contacts-page .rich-contacts{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:580px){.contacts-page .rich-contacts{grid-template-columns:1fr!important}}
