@@ -381,28 +381,15 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
  const buttons=[...gallery.querySelectorAll('button.unit-gallery-thumb')];
  if(!buttons.length)return;
  const image=dialog.querySelector('.gallery-large-image');
- const counter=dialog.querySelector('.gallery-counter');
- const strip=dialog.querySelector('.gallery-strip');
  let position=0,touchStartX=null;
  function show(index){
   position=(index+buttons.length)%buttons.length;
   const source=buttons[position];
   image.src=source.dataset.gallerySrc;
   image.alt=source.querySelector('img')?.alt||'';
-  counter.textContent=`${position+1} / ${buttons.length}`;
-  [...strip.children].forEach((thumb,i)=>{
-   thumb.setAttribute('aria-current',String(i===position));
-   if(i===position) thumb.scrollIntoView({block:'nearest',inline:'nearest',behavior:'instant'});
-  });
  }
  function close(){dialog.close();}
  buttons.forEach((button,index)=>{
-  const thumb=document.createElement('button');
-  thumb.type='button';thumb.className='gallery-strip-thumb';
-  thumb.setAttribute('aria-label',button.getAttribute('aria-label')||String(index+1));
-  const small=document.createElement('img');small.src=button.dataset.gallerySrc;small.alt='';small.loading='lazy';
-  thumb.appendChild(small);strip.appendChild(thumb);
-  thumb.addEventListener('click',()=>show(index));
   button.addEventListener('click',()=>{show(index);dialog.showModal();});
  });
  dialog.querySelector('.gallery-close').addEventListener('click',close);

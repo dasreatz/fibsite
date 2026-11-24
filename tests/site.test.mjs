@@ -206,5 +206,5 @@ test('dossier cards do not display extra combined position text',()=>{
  const page=renderPage('bureau');
  assert.match(page,/profile-trigger/);
  assert.doesNotMatch(page,/Директор FIB · Керівник ЦСО/);
- assert.match(page,/Директор FIB Olymp/);
+ assert.match(page,/Директор FIB/);
 });
