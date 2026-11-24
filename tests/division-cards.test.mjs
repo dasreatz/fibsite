@@ -11,7 +11,7 @@ test('division gallery contains exactly four linked photo cards without an extra
   const html=renderPage('units',locale);
   assert.equal((html.match(/class="division-article"/g)||[]).length,4);
   for(const u of units){
-   assert.match(html,new RegExp(u.id==='csoa'?'assets/hero-csoa\\.webp':`assets/units/${u.id}\\.webp`));
+   assert.match(html,new RegExp(u.id==='csoa'?'assets/units/csoa-preview\\.webp':`assets/units/${u.id}\\.webp`));
    assert.ok(html.includes(`href="/${locale==='uk'?'':locale+'/'}units/${u.id}/"`));
   }
   assert.doesNotMatch(html,/Переглянути підрозділ|View division|Division ansehen|class="division-cta"/i);

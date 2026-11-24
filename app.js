@@ -301,7 +301,7 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
  document.querySelectorAll('.profile-trigger').forEach(trigger=>trigger.addEventListener('click',()=>{
   const p=people.find(p=>p.id===trigger.dataset.person);if(!p)return;
   root.replaceChildren();const body=el('div',undefined,'profile-dialog-body',root);
-  const head=el('div',undefined,'profile-person-head',body); const picture=el('span',undefined,'profile-portrait',head);const seal=el('img',undefined,'',picture);seal.src=p.photo||'/assets/fib-seal.webp';seal.alt='';if(p.photo)picture.classList.add('has-photo');const summary=el('div',undefined,'profile-person-summary',head);
+  const head=el('div',undefined,'profile-person-head',body); const picture=el('span',undefined,'profile-portrait',head);const seal=el('img',undefined,'',picture);seal.src=p.photo||'/assets/fib-olymp-emblem-v52.webp';seal.alt='';if(p.photo)picture.classList.add('has-photo');const summary=el('div',undefined,'profile-person-summary',head);
   el('span',label.profile,'profile-kicker',summary);
   el('h2',p.name,'',summary).id='profile-name';
   el('p',p.title,'profile-title',summary);
