@@ -182,8 +182,8 @@ test('public individual division pages hide selection details, but academy discl
  const academy=renderPage('academy');
  assert.match(academy,/class="training-step"/);
  assert.match(academy,/Senior Agent/);
- assert.match(academy,/class="rank-entry-number">04/);
- assert.match(academy,/class="rank-entry-number">03/);
+ assert.match(academy,/Senior Agent <span>\(4\)<\/span>/);
+ assert.match(academy,/Agent <span>\(3\)<\/span>/);
  assert.match(academy,/<div class="training-grid" role="list">/);
  assert.equal((academy.match(/class="training-stage" role="listitem"/g)||[]).length,6);
  assert.doesNotMatch(academy,/<ol class="training-grid"/);
@@ -207,4 +207,46 @@ test('dossier cards do not display extra combined position text',()=>{
  assert.match(page,/profile-trigger/);
  assert.doesNotMatch(page,/Директор FIB · Керівник ЦСО/);
  assert.match(page,/Директор FIB/);
+});
+
+test('each page and language has its own browser title, with versioned assets',()=>{
+ for(const locale of ['uk','en','de']){
+  const titles=new Set();
+  for(const slug of routes){
+   const html=renderPage(slug,locale);
+   const match=html.match(/<title>([^<]+)<\/title>/);
+   assert.ok(match,`${locale}:${slug} must have a title`);
+   assert.match(match[1],/^FIB Olymp \| /);
+   assert.ok(!titles.has(match[1]),`${locale}:${slug} repeats a title`);
+   titles.add(match[1]);
+   assert.match(html,/\/app\.js\?v=5\.4\.0/);
+  }
+ }
+});
+
+test('bureau keeps portrait cards but no organizational connector strokes',()=>{
+ const html=renderPage('bureau');
+ assert.equal((html.match(/class="leader-card profile-trigger/g)||[]).length,8);
+ assert.doesNotMatch(html,/class="tree-stem/);
+ assert.match(css,/\.bureau-page \.tree-stem,[\s\S]*?\.bureau-page \.tree-node::after\{[\s\S]*?display:none!important/);
+ assert.match(css,/\.bureau-page \.leader-card \.leader-portrait/);
+});
+
+test('gallery dialog is controlled within the site, with only image, arrows and close',()=>{
+ const html=renderPage('units/csoa');
+ assert.match(html,/class="unit-gallery-dialog"/);
+ assert.match(html,/class="gallery-nav gallery-prev"/);
+ assert.match(html,/class="gallery-nav gallery-next"/);
+ assert.match(html,/class="gallery-close"/);
+ assert.doesNotMatch(html,/class="gallery-strip"|class="gallery-counter"/);
+ assert.match(js,/dialog\.showModal\(\)/);
+ assert.match(js,/dataset\.gallerySrc/);
+});
+
+test('academy requirements remain explicit without oversized repeated numerals',()=>{
+ const html=renderPage('academy');
+ assert.equal((html.match(/class="rank-entry"/g)||[]).length,2);
+ assert.doesNotMatch(html,/rank-entry-number/);
+ assert.match(html,/Senior Agent <span>\(4\)<\/span>/);
+ assert.match(html,/Agent <span>\(3\)<\/span>/);
 });

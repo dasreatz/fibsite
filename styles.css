@@ -1865,3 +1865,193 @@
   .site-footer .footer-inner{grid-template-columns:1fr!important;gap:12px!important}
   .site-footer nav{gap:8px 16px!important}
 }
+
+/* ===============================================================
+   FIB Olymp 5.4 — approved corrections, scoped by section.
+   Keeps all existing photographs, content, routes and interactions.
+   =============================================================== */
+
+/* One continuous background shared by the header and every inner page. */
+body.inner-layout{
+  background:radial-gradient(ellipse 68% 350px at 78% 104px,rgba(163,121,74,.067),transparent 80%),#0b0c0d!important;
+}
+.inner-layout .site-header{
+  background:linear-gradient(180deg,rgba(8,9,10,.55),rgba(8,9,10,0))!important;
+  border:0!important;box-shadow:none!important;
+}
+.inner-layout main.subpage{
+  background:transparent!important;
+}
+.inner-layout .subpage>.inner-heading.page-wrap{
+  width:100%!important;max-width:1760px!important;
+  margin-inline:auto!important;
+  padding:clamp(25px,2.75vw,48px) clamp(26px,4.25vw,78px) clamp(26px,2.5vw,40px)!important;
+}
+.inner-layout .subpage>.inner-heading h1,
+.inner-layout .news-page .inner-heading h1,
+.inner-layout .documents-page .inner-heading h1{
+  max-width:1250px!important;
+  font-size:clamp(40px,3.65vw,62px)!important;
+  letter-spacing:-.055em!important;line-height:1.12!important;
+  margin:9px 0 10px!important;
+}
+.inner-layout .subpage>.inner-heading>p{font-size:clamp(13px,1.05vw,16px)!important;line-height:1.55!important}
+@media(max-width:720px){
+  .inner-layout .subpage>.inner-heading.page-wrap{padding:30px 23px 27px!important}
+  .inner-layout .subpage>.inner-heading h1,
+  .inner-layout .news-page .inner-heading h1,
+  .inner-layout .documents-page .inner-heading h1{font-size:clamp(33px,8vw,48px)!important}
+}
+
+/* Home seal belongs to its OWN grid track, never behind the text frame. */
+@media(min-width:1151px){
+  .home .home-leadership{
+    display:grid!important;
+    grid-template-columns:minmax(0,1.2fr) minmax(205px,.58fr) minmax(280px,.95fr)!important;
+    align-items:center!important;gap:clamp(12px,2.1vw,35px)!important;
+    min-height:490px!important;
+    padding-top:64px!important;padding-bottom:68px!important;
+    overflow:visible!important;
+  }
+  .home .home-leadership-left{grid-column:1!important;grid-row:1!important;z-index:2!important}
+  .home .home-leadership .home-seal{
+    grid-column:2!important;grid-row:1!important;
+    position:relative!important;inset:auto!important;
+    display:block!important;width:100%!important;height:auto!important;
+    aspect-ratio:1!important;max-width:340px!important;min-width:0!important;
+    margin:0 auto!important;justify-self:center!important;
+    opacity:.21!important;transform:translate(0,0)!important;
+    animation:fib-seal-drift-side 11s ease-in-out infinite!important;
+  }
+  .home .home-bureau-frame{
+    grid-column:3!important;grid-row:1!important;
+    position:relative!important;z-index:2!important;
+    justify-self:stretch!important;width:100%!important;
+    max-width:450px!important;margin:0!important;
+  }
+}
+@media(min-width:721px) and (max-width:1150px){
+  .home .home-leadership{
+    display:grid!important;grid-template-columns:minmax(0,1fr) minmax(270px,.7fr)!important;
+    grid-template-rows:auto auto!important;
+    align-items:center!important;gap:18px 30px!important;
+    padding-top:60px!important;padding-bottom:75px!important;
+    overflow:visible!important;
+  }
+  .home .home-leadership-left{grid-column:1!important;grid-row:1 / span 2!important}
+  .home .home-leadership .home-seal{
+    grid-column:2!important;grid-row:1!important;
+    position:relative!important;inset:auto!important;
+    width:clamp(170px,20vw,235px)!important;height:auto!important;aspect-ratio:1!important;
+    justify-self:center!important;margin:0 auto!important;opacity:.19!important;
+    animation:fib-seal-drift-side 11s ease-in-out infinite!important;
+  }
+  .home .home-bureau-frame{
+    grid-column:2!important;grid-row:2!important;max-width:400px!important;
+    justify-self:center!important;margin:0!important;
+  }
+}
+@media(max-width:720px){
+  .home .home-leadership{
+    display:grid!important;grid-template-columns:1fr!important;
+    grid-template-rows:auto auto auto!important;min-height:0!important;
+    gap:24px!important;overflow:visible!important;
+    padding-top:55px!important;padding-bottom:65px!important;
+  }
+  .home .home-leadership-left{grid-column:1!important;grid-row:1!important}
+  .home .home-leadership .home-seal{
+    grid-column:1!important;grid-row:2!important;position:relative!important;inset:auto!important;
+    width:min(65vw,230px)!important;height:auto!important;aspect-ratio:1!important;
+    justify-self:center!important;margin:0!important;opacity:.18!important;
+    animation:fib-seal-drift-side 11s ease-in-out infinite!important;
+  }
+  .home .home-bureau-frame{grid-column:1!important;grid-row:3!important;width:100%!important;max-width:500px!important;justify-self:start!important}
+}
+@media(prefers-reduced-motion:reduce){.home .home-leadership .home-seal{animation:none!important;transform:none!important}}
+
+/* Director and deputies: single gold edge, subtle glow at both sides.
+   Absolutely NO connecting lines, auxiliary frame, stars or laurels. */
+.bureau-page .tree-stem,
+.bureau-page .leader-row::before,.bureau-page .leader-row::after,
+.bureau-page .head-row::before,.bureau-page .head-row::after,
+.bureau-page .tree-node::before,.bureau-page .tree-node::after{
+  display:none!important;content:none!important;
+}
+.bureau-page .leadership-tree{display:flex!important;flex-direction:column!important;align-items:center!important;gap:30px!important}
+.bureau-page .leader-row,.bureau-page .head-row{margin:0 auto!important}
+.bureau-page .leader-card,
+.bureau-page .leader-director .leader-card,
+.bureau-page .tree-node .leader-card{
+  background:
+   radial-gradient(ellipse 15px 85px at 0 46%,rgba(222,171,101,.11),transparent 100%),
+   radial-gradient(ellipse 15px 85px at 100% 46%,rgba(222,171,101,.11),transparent 100%),
+   linear-gradient(160deg,#101213,#08090a 90%)!important;
+  border:1.5px solid rgba(222,175,101,.77)!important;
+  box-shadow:0 0 18px rgba(211,159,83,.055)!important;
+}
+.bureau-page .leader-card::before,.bureau-page .leader-card::after{display:none!important;content:none!important}
+.bureau-page .leader-card .leader-portrait,
+.bureau-page .leader-card-director .leader-portrait{border:0!important;box-shadow:none!important;padding:0!important}
+.bureau-page .leader-card:hover,.bureau-page .leader-card:focus-visible{border-color:#edc78b!important;box-shadow:0 0 20px rgba(216,181,120,.14)!important}
+
+/* Division sections share ONE left alignment, without the unwanted horizontal rule. */
+.unit-page .unit-editorial,
+.unit-page .unit-about,
+.unit-page .unit-gallery-section{
+  width:100%!important;max-width:var(--width)!important;margin-inline:auto!important;
+  padding-inline:clamp(24px,6vw,100px)!important;
+}
+.unit-page .unit-story,
+.unit-page .unit-about-copy{margin-left:0!important;padding-left:0!important;transform:none!important}
+.unit-page .unit-editorial{grid-template-columns:minmax(0,1fr) minmax(190px,245px)!important;align-items:start!important;gap:clamp(28px,4vw,55px)!important}
+.unit-page .unit-management>div+div{border-top:0!important;padding-top:19px!important}
+@media(max-width:800px){.unit-page .unit-editorial{grid-template-columns:1fr!important;gap:18px!important}}
+
+/* Academy: concise rank qualifications, not 04/03 billboard tiles. */
+.academy-page .requirement-pair{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  max-width:1120px!important;width:100%!important;gap:clamp(18px,3vw,44px)!important;
+}
+.academy-page .rank-entry{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;
+  gap:10px!important;min-height:0!important;padding:14px 6px 21px!important;
+  border:0!important;border-bottom:1px solid rgba(216,181,120,.27)!important;
+  border-radius:0!important;background:transparent!important;box-shadow:none!important;
+}
+.academy-page .rank-entry-category{
+  font-size:10px!important;line-height:1.5!important;letter-spacing:.12em!important;
+  color:#d8b578!important;font-weight:800!important;text-transform:uppercase!important;
+}
+.academy-page .rank-entry h3{font-size:clamp(20px,2vw,27px)!important;margin:0!important;line-height:1.25!important;color:#f1eee9!important}
+.academy-page .rank-entry-qualification{font-size:13px!important;color:#b9b4ad!important;margin:4px 0 0!important}
+.academy-page .rank-entry-qualification strong{display:block!important;color:#f4e5c9!important;font-size:17px!important;margin-top:4px!important}
+.academy-page .rank-entry-qualification strong span{color:#c4a071!important;font-size:14px!important}
+.academy-page .rank-entry-note{font-size:12px!important;line-height:1.5!important;color:#a6a199!important}
+@media(max-width:650px){.academy-page .requirement-pair{grid-template-columns:1fr!important;gap:12px!important}}
+
+/* Recruitment: true-black panels, no floating gray islands. Inputs stay distinct. */
+.join-page .recruitment-main,
+.join-page .recruitment-side .aside-panel{
+  background:#0c0d0e!important;border:1px solid rgba(216,181,120,.09)!important;
+  box-shadow:none!important;
+}
+.join-page .api-message,
+.join-page .api-message[data-type=closed],
+.join-page .api-message[data-type=ok]{
+  background:#111212!important;border:1px solid rgba(216,181,120,.1)!important;
+}
+.join-page form input:not([type=checkbox]),
+.join-page form select,.join-page form textarea{background:#111315!important;border:1px solid rgba(216,181,120,.08)!important}
+.join-page .aside-panel .action-button.secondary{background:#252728!important}
+
+/* About-bureau CTA should look like the compact, rounded dark-grey nav pill. */
+.home .hero-actions .action-button{min-width:0!important;min-height:42px!important;padding:10px 17px!important;border-radius:11px!important}
+.home .hero-actions .action-button.ghost{
+  background:#303234!important;color:#f3f0eb!important;border:0!important;
+  min-width:0!important;box-shadow:none!important;backdrop-filter:none!important;
+}
+.home .hero-actions .action-button.ghost:hover,
+.home .hero-actions .action-button.ghost:focus-visible{background:#414244!important;color:#f8deb0!important;border:0!important}
+/* The active navigation entry gets the same soft hover as the other entries. */
+.site-header .nav-link.current:hover::before,
+.site-header .nav-link.current:focus-visible::before{display:block!important;opacity:1!important}
