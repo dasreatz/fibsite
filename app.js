@@ -9,7 +9,7 @@ if (document.body.classList.contains('route-home')) {
 const FIB_LANG=document.documentElement.lang||'uk';
 const fibText=(uk,en,de)=>FIB_LANG==='en'?en:FIB_LANG==='de'?de:uk;
 const RUNTIME_TEXT=[
- ['Новачок','Без досвіду','Ohne Vorerfahrung'],['Є досвід RP','Practical experience','Praktische Erfahrung'],['Практичний досвід','Practical experience','Praktische Erfahrung'],['Є досвід державних організацій','Public service experience','Erfahrung im öffentlichen Dienst'],
+ ['Новачок','No experience','Keine Vorerfahrung'],['Є досвід RP','Practical experience','Praktische Erfahrung'],['Практичний досвід','Practical experience','Praktische Erfahrung'],['Є досвід державних організацій','Public service experience','Erfahrung im öffentlichen Dienst'],
  ['Відкрити меню','Open menu','Menü öffnen'],['Закрити меню','Close menu','Menü schließen'],
  ['Сервер заявок недоступний. Дані не надіслано.','The application server is unavailable. No data was sent.','Der Bewerbungsserver ist nicht verfügbar. Es wurden keine Daten gesendet.'],
  ['Не вдалося виконати запит.','Could not complete the request.','Die Anfrage konnte nicht abgeschlossen werden.'],
@@ -49,7 +49,33 @@ const RUNTIME_TEXT=[
  ['Потрібна авторизація.','Authorization required.','Anmeldung erforderlich.'],
  ['Сервер перегляду заявок поки недоступний.','Application review service unavailable.','Bewerbungsdienst nicht verfügbar.'],
  ['Забагато спроб. Спробуй пізніше.','Too many attempts. Try again later.','Zu viele Versuche. Bitte später erneut versuchen.'],
- ['Запит має надходити із сайту FIB.','This request must originate from the FIB site.','Die Anfrage muss von der FIB-Website stammen.']
+ ['Запит має надходити із сайту FIB.','This request must originate from the FIB site.','Die Anfrage muss von der FIB-Website stammen.'],
+ ['Забагато перевірок. Спробуй пізніше.', 'Too many status checks. Please try again later.', 'Zu viele Statusabfragen. Bitte später erneut versuchen.'],
+ ['Забагато спроб входу.', 'Too many sign-in attempts.', 'Zu viele Anmeldeversuche.'],
+ ['Забагато спроб.', 'Too many attempts.', 'Zu viele Versuche.'],
+ ['Вхід для керівництва ще не налаштований.', 'Staff access has not been configured yet.', 'Der Zugang für die Leitung ist noch nicht eingerichtet.'],
+ ['Сховище недоступне.', 'Storage service unavailable.', 'Der Datenspeicher ist nicht verfügbar.'],
+ ['Невідоме рішення.', 'Unknown decision.', 'Unbekannte Entscheidung.'],
+ ['Анкету не знайдено.', 'Application not found.', 'Bewerbung nicht gefunden.'],
+ ['Повторне запрошення можливе лише для схваленої заявки.', 'A new invitation can only be issued for an approved application.', 'Eine neue Einladung kann nur für eine genehmigte Bewerbung ausgestellt werden.'],
+ ['Рішення вже прийняте.', 'A decision has already been made.', 'Es wurde bereits eine Entscheidung getroffen.'],
+ ['Невірний код.', 'Invalid code.', 'Ungültiger Code.'],
+ ['Запрошення не знайдене.', 'Invitation not found.', 'Einladung nicht gefunden.'],
+ ['Це запрошення вже використане.', 'This invitation has already been used.', 'Diese Einladung wurde bereits verwendet.'],
+ ['Термін запрошення минув.', 'The invitation has expired.', 'Die Einladung ist abgelaufen.'],
+ ['Внутрішня помилка. Спробуй пізніше.', 'Internal error. Please try again later.', 'Interner Fehler. Bitte versuchen Sie es später erneut.'],
+ ['Непідтримуваний формат даних.', 'Unsupported data format.', 'Nicht unterstütztes Datenformat.'],
+ ['Занадто великий запит.', 'Request too large.', 'Anfrage zu groß.'],
+ ['Невірний формат JSON.', 'Invalid JSON format.', 'Ungültiges JSON-Format.'],
+ ['Перевір ім’я кандидата (3–48 символів).', 'Check the applicant name (3–48 characters).', 'Prüfen Sie den Namen des Bewerbers (3–48 Zeichen).'],
+ ['Вибери варіант досвіду.', 'Select your experience level.', 'Wählen Sie Ihre Erfahrung aus.'],
+ ['Відповідь має містити від 30 до 1200 символів.', 'The answer must contain between 30 and 1200 characters.', 'Die Antwort muss zwischen 30 und 1200 Zeichen enthalten.'],
+ ['Підтвердь, що надсилаєш лише ігрові дані.', 'Confirm that you are submitting roleplay data only.', 'Bestätigen Sie, dass Sie nur Rollenspieldaten übermitteln.'],
+ ['Заявка', 'Application', 'Bewerbung'],
+ ['Номер', 'Number', 'Nummer'],
+ ['Код', 'Code', 'Code'],
+ ['Method not allowed','Method not allowed','Methode nicht erlaubt'],
+ ['API route not found','API route not found','API-Endpunkt nicht gefunden'],
 ];
 function fibRuntimeTranslate(message){
  const str=String(message??'');
@@ -175,7 +201,7 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
         const copy=add(success,'button','Скопіювати дані','action-button secondary');copy.type='button';
         copy.addEventListener('click',()=>{
           if(!navigator.clipboard){putText(formFeedback,'Виділи номер і код вручну та збережи.');return;}
-          navigator.clipboard.writeText(`Номер: ${data.id}\nКод: ${data.code}`).then(()=>putText(copy,'Скопійовано'),()=>putText(formFeedback,'Не вдалося скопіювати. Скопіюй дані вручну.'));
+          navigator.clipboard.writeText(`${fibText('Номер','Number','Nummer')}: ${data.id}\n${fibText('Код','Code','Code')}: ${data.code}`).then(()=>putText(copy,'Скопійовано'),()=>putText(formFeedback,'Не вдалося скопіювати. Скопіюй дані вручну.'));
         });
         const statusForm=document.getElementById('application-status-form');
         if(statusForm){statusForm.elements.id.value=data.id;statusForm.elements.code.value=data.code;}
@@ -218,7 +244,7 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
         const card=add(records,'article',undefined,'staff-record');
         const top=add(card,'div',undefined,'staff-record-top');add(top,'h3',item.rpName);
         add(top,'span',statusText[item.status]||item.status,'staff-record-meta');
-        add(card,'p',`${item.id} · ${new Date(item.createdAt).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_LANG==='de'?'de-DE':'uk-UA')} · ${item.experience}`);
+        add(card,'p',`${item.id} · ${new Date(item.createdAt).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_LANG==='de'?'de-DE':'uk-UA')} · ${fibRuntimeTranslate(item.experience)}`);
         add(card,'p',item.motivation);
         if(item.status==='approved'){
           add(card,'p',item.invitationUsedAt?'Запрошення підтверджено.':`Запрошення чинне до ${new Date(item.invitationExpiresAt).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_LANG==='de'?'de-DE':'uk-UA')}`);

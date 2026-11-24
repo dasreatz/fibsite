@@ -1,5 +1,6 @@
 // Home layout and structure are preserved; only localized text changes.
 const entries=[
+ ['Вступ до FIB','Joining the FIB','Eintritt ins FIB'],['Співробітники FIB','FIB personnel','FIB-Mitarbeitende'],
  ['Головна','Home','Startseite'],['Про бюро','About the bureau','Über die Behörde'],['Підрозділи','Divisions','Abteilungen'],['Новини','News','Nachrichten'],['Документи','Documents','Dokumente'],['Академія','Academy','Akademie'],['Контакти','Contacts','Kontakt'],['Вступ','Join','Bewerbung'],
  ['ФЕДЕРАЛЬНЕ БЮРО РОЗСЛІДУВАНЬ · OLYMP','FEDERAL INVESTIGATION BUREAU · OLYMP','FEDERAL INVESTIGATION BUREAU · OLYMP'],
  ['ДИСЦИПЛІНА.','DISCIPLINE.','DISZIPLIN.'],['ЄДНІСТЬ.','UNITY.','EINHEIT.'],['РЕЗУЛЬТАТ.','RESULTS.','ERGEBNISSE.'],
