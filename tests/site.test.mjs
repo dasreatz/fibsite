@@ -181,9 +181,9 @@ test('public individual division pages hide selection details, but academy discl
  }
  const academy=renderPage('academy');
  assert.match(academy,/class="training-step"/);
- assert.match(academy,/Senior Agent/);
- assert.match(academy,/Senior Agent <span>\(4\)<\/span>/);
- assert.match(academy,/Agent <span>\(3\)<\/span>/);
+ assert.match(academy,/Старший агент/);
+ assert.match(academy,/Старший агент <span>\(4\)<\/span>/);
+ assert.match(academy,/Агент <span>\(3\)<\/span>/);
  assert.match(academy,/<div class="training-grid" role="list">/);
  assert.equal((academy.match(/class="training-stage" role="listitem"/g)||[]).length,6);
  assert.doesNotMatch(academy,/<ol class="training-grid"/);
@@ -219,7 +219,7 @@ test('each page and language has its own browser title, with versioned assets',(
    assert.match(match[1],/^FIB Olymp \| /);
    assert.ok(!titles.has(match[1]),`${locale}:${slug} repeats a title`);
    titles.add(match[1]);
-   assert.match(html,/\/app\.js\?v=5\.4\.0/);
+   assert.match(html,/\/app\.js\?v=5\.5\.0/);
   }
  }
 });
@@ -247,6 +247,28 @@ test('academy requirements remain explicit without oversized repeated numerals',
  const html=renderPage('academy');
  assert.equal((html.match(/class="rank-entry"/g)||[]).length,2);
  assert.doesNotMatch(html,/rank-entry-number/);
- assert.match(html,/Senior Agent <span>\(4\)<\/span>/);
- assert.match(html,/Agent <span>\(3\)<\/span>/);
+ assert.match(html,/Старший агент <span>\(4\)<\/span>/);
+ assert.match(html,/Агент <span>\(3\)<\/span>/);
+});
+
+
+test('unmixed language ranks and simplified official bureau section',()=>{
+ const uk=renderPage('academy','uk'),en=renderPage('academy','en'),de=renderPage('academy','de');
+ assert.match(uk,/Старший агент <span>\(4\)<\/span>/);
+ assert.doesNotMatch(uk,/<small>Senior Agent<\/small>/);
+ assert.match(en,/Senior Agent <span>\(4\)<\/span>/);
+ assert.match(de,/Mindestrang/);
+ const bureau=renderPage('bureau','uk');
+ assert.doesNotMatch(bureau,/Структура <em>управління<\/em>/);
+ assert.doesNotMatch(bureau,/Організаційна структура/);
+ assert.match(bureau,/Керівництво <em>бюро/);
+});
+
+test('gallery markup has photo-centered controls and overlay close behavior',()=>{
+ const html=renderPage('units/csoa','uk');
+ assert.match(html,/class="gallery-image-stage"/);
+ assert.match(js,/body\.classList\.add\('gallery-open'\)/);
+ assert.match(js,/classList\.contains\('unit-gallery-viewer'\)/);
+ assert.match(css,/\.gallery-image-stage \.gallery-prev/);
+ assert.doesNotMatch(html,/class="gallery-strip"|class="gallery-counter"/);
 });

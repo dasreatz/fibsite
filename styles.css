@@ -2055,3 +2055,146 @@ body.inner-layout{
 /* The active navigation entry gets the same soft hover as the other entries. */
 .site-header .nav-link.current:hover::before,
 .site-header .nav-link.current:focus-visible::before{display:block!important;opacity:1!important}
+
+/* ============================================================
+   5.5 — restrained dark theme, accessible gallery and copy polish
+   ============================================================ */
+
+/* Keep headings purposeful and prevent a second heading from competing
+   with each page's masthead. Existing section headings still identify content. */
+.bureau-page .leadership{padding-top:16px!important}
+.bureau-page .leadership-tree{gap:26px!important}
+.units-page .division-list{padding-top:12px!important}
+.inner-layout .subpage>.inner-heading.page-wrap{padding-top:clamp(28px,3.3vw,54px)!important;padding-bottom:clamp(20px,2.7vw,42px)!important}
+.inner-layout .subpage>.inner-heading h1{font-size:clamp(36px,3.3vw,57px)!important}
+@media(max-width:720px){.inner-layout .subpage>.inner-heading h1{font-size:clamp(33px,7vw,47px)!important}}
+
+/* Make the leadership cards feel refined without golden rectangles
+   or a harsh mid-card gap. A single subtle silhouette and hover accent. */
+.bureau-page .leader-card,
+.bureau-page .leader-director .leader-card,
+.bureau-page .tree-node .leader-card,
+.bureau-page .head-row .leader-card{
+  min-height:336px!important;
+  padding:24px 16px!important;
+  background:linear-gradient(155deg,#111314 0%,#0b0c0d 62%,#08090a 100%)!important;
+  border:1px solid rgba(204,164,104,.23)!important;
+  border-radius:19px!important;
+  box-shadow:0 14px 38px rgba(0,0,0,.24)!important;
+}
+.bureau-page .leader-card:hover,.bureau-page .leader-card:focus-visible{
+  border-color:rgba(229,183,112,.72)!important;
+  box-shadow:0 18px 45px rgba(0,0,0,.38),0 0 24px rgba(216,181,120,.10)!important;
+}
+.bureau-page .leader-card .leader-portrait,
+.bureau-page .leader-card-director .leader-portrait{
+  margin-top:20px!important;width:122px!important;height:122px!important;
+  border:0!important;box-shadow:none!important;
+}
+.bureau-page .leader-card .leader-copy{
+  margin:29px auto 0!important;padding:0!important;
+  justify-content:center!important;gap:8px!important;
+}
+.bureau-page .leader-card .leader-role{font-size:11px!important;color:#d3b07a!important}
+@media(max-width:680px){
+  .bureau-page .leader-card,.bureau-page .leader-director .leader-card,.bureau-page .tree-node .leader-card{min-height:287px!important}
+  .bureau-page .leader-card .leader-portrait{width:98px!important;height:98px!important;margin-top:12px!important}
+  .bureau-page .leader-card .leader-copy{margin-top:21px!important}
+}
+
+/* More charcoal-black and less obvious gray on four division previews. */
+.home .unit-item,.home .unit-item .unit-info,
+.units-page .division-article,.units-page .division-info{
+ background:#0d0e0f!important;
+}
+.home .unit-item:hover,.home .unit-item:focus-visible,
+.units-page .division-article:hover,.units-page .division-article:focus-visible{
+ background:#121414!important;
+}
+.units-page .division-article .info-panel-tag,
+.home .unit-item .info-panel-tag{background:#171819!important}
+/* The user approved the contacts, which retain their existing styling. */
+.academy-page .rank-item,.join-page .aside-panel{background:#0d0e0f!important}
+
+/* Compact, centered navigation highlight on ALL items, active and inactive. */
+.site-header .nav-link{
+  min-height:36px!important;padding:0 clamp(8px,.9vw,13px)!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  border-radius:11px!important;
+}
+.site-header .nav-link::before{
+  inset:2px 1px!important;border-radius:9px!important;
+  background:rgba(44,45,46,.64)!important;filter:none!important;
+  transition:opacity .24s ease!important;
+}
+.site-header .nav-link:hover::before,
+.site-header .nav-link:focus-visible::before,
+.site-header .nav-link.current:hover::before,
+.site-header .nav-link.current:focus-visible::before{
+  display:block!important;opacity:1!important;
+}
+.site-header .nav-link.current:not(:hover):not(:focus-visible)::before{opacity:0!important}
+
+/* Album viewer always fills its viewport, never makes a vertical page
+   scrollbar. The navigation arrows are positioned relative to the photo. */
+html:has(.unit-gallery-dialog[open]),body.gallery-open{overflow:hidden!important}
+.unit-gallery-dialog{
+ position:fixed!important;inset:0!important;margin:0!important;
+ width:100vw!important;height:100dvh!important;
+ min-width:0!important;max-width:none!important;max-height:none!important;
+ overflow:hidden!important;border:0!important;border-radius:0!important;
+ padding:0!important;background:rgba(5,6,7,.97)!important;
+ scrollbar-width:none!important;
+}
+.unit-gallery-dialog::-webkit-scrollbar,.unit-gallery-dialog *::-webkit-scrollbar{display:none!important}
+.unit-gallery-dialog .unit-gallery-viewer{
+ width:100%!important;height:100%!important;min-height:0!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:42px 54px!important;overflow:hidden!important;
+}
+.unit-gallery-dialog .gallery-image-stage{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ position:relative!important;width:fit-content!important;min-width:0!important;
+ max-width:calc(100vw - 120px)!important;max-height:calc(100dvh - 90px)!important;
+}
+.unit-gallery-dialog .gallery-image-stage .gallery-large-image{
+ display:block!important;width:auto!important;height:auto!important;
+ max-width:100%!important;max-height:calc(100dvh - 90px)!important;
+ object-fit:contain!important;flex:0 1 auto!important;
+ border:0!important;border-radius:0!important;
+}
+.unit-gallery-dialog .gallery-image-stage .gallery-nav{
+ position:absolute!important;top:50%!important;transform:translateY(-50%)!important;
+ width:31px!important;height:44px!important;font-size:35px!important;
+ background:transparent!important;border:0!important;
+}
+.unit-gallery-dialog .gallery-image-stage .gallery-prev{left:-41px!important}
+.unit-gallery-dialog .gallery-image-stage .gallery-next{right:-41px!important}
+.unit-gallery-dialog .gallery-close{position:fixed!important;top:12px!important;right:15px!important}
+@media(max-width:640px){
+ .unit-gallery-dialog .unit-gallery-viewer{padding:40px 35px!important}
+ .unit-gallery-dialog .gallery-image-stage{max-width:calc(100vw - 85px)!important;max-height:calc(100dvh - 80px)!important}
+ .unit-gallery-dialog .gallery-image-stage .gallery-large-image{max-height:calc(100dvh - 80px)!important}
+ .unit-gallery-dialog .gallery-image-stage .gallery-prev{left:-30px!important}
+ .unit-gallery-dialog .gallery-image-stage .gallery-next{right:-30px!important}
+ .unit-gallery-dialog .gallery-image-stage .gallery-nav{font-size:29px!important;width:28px!important}
+}
+
+/* Keep the existing two small homepage links unboxed, but clearly golden
+   and readable against the dark end section. */
+.home-end .lift-links .text-link{
+  color:#e2b879!important;font-size:clamp(14px,1vw,17px)!important;
+  font-weight:800!important;letter-spacing:.01em!important;
+  min-height:45px!important;padding:7px 9px!important;
+  background:transparent!important;border:0!important;
+}
+.home-end .lift-links .text-link:hover,.home-end .lift-links .text-link:focus-visible{
+  color:#ffe0a3!important;text-shadow:0 0 14px rgba(220,164,78,.40)!important;
+}
+/* Documents remain small text references, not two oversized panels. */
+.documents-page .record-card h3{color:#ddba81!important;font-size:clamp(14px,1.08vw,16px)!important}
+.documents-page .record-card:hover h3,.documents-page .record-card:focus-visible h3{color:#ffdfa5!important}
+
+/* A little more visible falling dust/snow while retaining the clear hero image. */
+.ambient-fall{opacity:1!important;pointer-events:none!important}
+@media(prefers-reduced-motion:reduce){.ambient-fall{display:none!important}}

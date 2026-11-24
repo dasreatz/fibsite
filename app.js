@@ -333,15 +333,15 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
  const rand=(lo,hi)=>lo+Math.random()*(hi-lo);
  function reset(fromTop=false){
   return {x:rand(0,width),y:fromTop?rand(-20,-3):rand(0,height),
-   size:rand(.45,1.18),speed:rand(7,16),sway:rand(3,11),phase:rand(0,Math.PI*2),
-   alpha:rand(.045,.12),warm:Math.random()<.20};
+   size:rand(.65,1.5),speed:rand(8,17),sway:rand(3,12),phase:rand(0,Math.PI*2),
+   alpha:rand(.12,.24),warm:Math.random()<.18};
  }
  function resize(){
   width=window.innerWidth;height=window.innerHeight;
   scale=Math.min(window.devicePixelRatio||1,1.5);
   canvas.width=Math.round(width*scale);canvas.height=Math.round(height*scale);
   ctx.setTransform(scale,0,0,scale,0,0);
-  motes=Array.from({length:Math.min(32,Math.max(12,Math.round(width*height/32000)))},()=>reset());
+  motes=Array.from({length:Math.min(46,Math.max(20,Math.round(width*height/25000)))},()=>reset());
  }
  function draw(time){
   frame=0;
@@ -389,13 +389,17 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   image.alt=source.querySelector('img')?.alt||'';
  }
  function close(){dialog.close();}
+ dialog.addEventListener('close',()=>document.body.classList.remove('gallery-open'));
  buttons.forEach((button,index)=>{
-  button.addEventListener('click',()=>{show(index);dialog.showModal();});
+  button.addEventListener('click',()=>{show(index);dialog.showModal();document.body.classList.add('gallery-open');});
  });
  dialog.querySelector('.gallery-close').addEventListener('click',close);
  dialog.querySelector('.gallery-prev').addEventListener('click',()=>show(position-1));
  dialog.querySelector('.gallery-next').addEventListener('click',()=>show(position+1));
- dialog.addEventListener('click',event=>{if(event.target===dialog)close();});
+ dialog.addEventListener('click',event=>{
+  // Any empty overlay space closes the photo; clicks on the image and controls do not.
+  if(event.target===dialog||event.target.classList.contains('unit-gallery-viewer')||event.target.classList.contains('gallery-image-stage'))close();
+ });
  dialog.addEventListener('keydown',event=>{
   if(event.key==='ArrowRight'){event.preventDefault();show(position+1);}
   if(event.key==='ArrowLeft'){event.preventDefault();show(position-1);}
