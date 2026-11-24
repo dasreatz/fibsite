@@ -219,7 +219,7 @@ test('each page and language has its own browser title, with versioned assets',(
    assert.match(match[1],/^FIB Olymp \| /);
    assert.ok(!titles.has(match[1]),`${locale}:${slug} repeats a title`);
    titles.add(match[1]);
-   assert.match(html,/\/app\.js\?v=5\.6\.0/);
+   assert.match(html,/\/app\.js\?v=5\.7\.0/);
   }
  }
 });

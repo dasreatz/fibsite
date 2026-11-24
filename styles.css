@@ -2226,61 +2226,74 @@ html:has(.unit-gallery-dialog[open]),body.gallery-open{overflow:hidden!important
 .ambient-fall{opacity:1!important;pointer-events:none!important}
 @media(prefers-reduced-motion:reduce){.ambient-fall{display:none!important}}
 
-
-/* v5.6 targeted corrections: aligned hero CTAs, centered nav, scrollable dossiers. */
-/* Keep buttons directly under the start of the hero's text column. */
+/* v5.7: restore original right-aligned desktop navigation (before v5.6),
+   compact hero actions, and a genuinely scrollable dossier content viewport. */
 .home .hero-copy .hero-actions{
   justify-content:flex-start!important;
-  margin-left:0!important;
-  padding-left:0!important;
+  margin-left:0!important;padding-left:0!important;
+  gap:12px!important;
 }
-.home .hero-actions .action-button.primary{
-  background:#f4cd7f!important;
-  border-color:#ffe4a8!important;
-  color:#211706!important;
-  box-shadow:0 5px 22px rgba(240,185,94,.19)!important;
+.home .hero-copy .hero-actions .action-button{
+  min-width:175px!important;
+  min-height:46px!important;
+  padding:10px 17px!important;
+  font-size:13px!important;
+  border-radius:10px!important;
+  box-shadow:none!important;
 }
-.home .hero-actions .action-button.primary:hover,
-.home .hero-actions .action-button.primary:focus-visible{
-  background:#ffdb91!important;
-  border-color:#ffedbc!important;
+.home .hero-copy .hero-actions .action-button.primary{
+  background:#f1c878!important;
+  color:#211608!important;
+  border:1px solid #f5d18e!important;
 }
-.home .hero-actions .action-button.ghost{
+.home .hero-copy .hero-actions .action-button.primary:hover,
+.home .hero-copy .hero-actions .action-button.primary:focus-visible{
+  background:#ffda91!important;
+  box-shadow:0 5px 21px rgba(222,171,89,.2)!important;
+}
+.home .hero-copy .hero-actions .action-button.ghost{
   background:#343536!important;
   color:#f3f1ed!important;
-  border-color:rgba(230,228,219,.09)!important;
-  box-shadow:0 4px 18px rgba(0,0,0,.21)!important;
+  border:1px solid rgba(230,228,219,.08)!important;
   backdrop-filter:none!important;
 }
-.home .hero-actions .action-button.ghost:hover,
-.home .hero-actions .action-button.ghost:focus-visible{
+.home .hero-copy .hero-actions .action-button.ghost:hover,
+.home .hero-copy .hero-actions .action-button.ghost:focus-visible{
   background:#414345!important;
-  border-color:rgba(230,228,219,.18)!important;
+  border-color:rgba(230,228,219,.16)!important;
   color:#fff!important;
-  box-shadow:0 6px 21px rgba(0,0,0,.25)!important;
 }
-/* The logo stays on the left; the entire desktop nav, not just its active pill, is centered. */
-@media(min-width:1071px){
-  .site-header{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;}
-  .site-header .brand{grid-column:1!important;justify-self:start!important;}
-  .site-header .nav-shell{grid-column:2!important;justify-self:center!important;justify-content:center!important;}
-  .site-header .nav{justify-content:center!important;}
+@media(max-width:520px){
+  .home .hero-copy .hero-actions{gap:10px!important;}
+  .home .hero-copy .hero-actions .action-button{
+    flex:1 1 auto!important;width:calc(50% - 5px)!important;
+    min-width:0!important;min-height:45px!important;
+    padding:10px 9px!important;font-size:12px!important;
+  }
 }
-@media(min-width:1071px) and (max-width:1220px){
-  .site-header{padding-inline:17px!important;}
-  .site-header .brand img{width:34px!important;height:34px!important;}
-  .site-header .brand{gap:8px!important;}
-  .site-header .brand-type strong{font-size:14px!important;}
-  .site-header .brand-type small{font-size:5px!important;}
-  .site-header .nav-link{padding-inline:6px!important;font-size:10px!important;}
-}
-/* Preserve real scrolling in all languages; hide only the scrollbar track. */
+/* The dialog box itself never scrolls; its dedicated content region does.
+   This prevents native <dialog> centering/anchoring from trapping long bios. */
 .profile-dialog[open]{
+  display:block!important;
+  overflow:hidden!important;
+  inset:0!important;margin:auto!important;
   max-height:min(88dvh,900px)!important;
+}
+.profile-dialog #profile-dialog-content{
+  display:block!important;
+  max-height:min(88dvh,900px)!important;
+  min-height:0!important;
   overflow-x:hidden!important;
   overflow-y:auto!important;
-  overscroll-behavior:contain!important;
+  overscroll-behavior-y:contain!important;
   scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y;
 }
-.profile-dialog[open]::-webkit-scrollbar{display:none!important;}
-.profile-dialog[open] .profile-dialog-body{min-height:min-content!important;}
+.profile-dialog #profile-dialog-content::-webkit-scrollbar{display:none!important;}
+.profile-dialog .profile-close{
+  position:absolute!important;float:none!important;
+  margin:0!important;top:13px!important;right:13px!important;
+  z-index:10!important;
+}
