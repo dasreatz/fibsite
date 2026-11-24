@@ -312,10 +312,18 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   el('p',p.career||label.withheld,'profile-paragraph',body);
   el('span',label.biography,'profile-subhead',body);
   for(const paragraph of (p.biography||label.withheld).split(/\n\s*\n/).filter(Boolean)){el('p',paragraph.trim(),'profile-paragraph',body);}
+  // Every dossier must open at the beginning, even after another language/entry was viewed.
+  // Native dialog focus and scroll anchoring can otherwise retain an old position.
   modal.showModal();
+  modal.scrollTop=0;
+  root.scrollTop=0;
+  const closeButton=document.getElementById('profile-close');
+  closeButton?.focus({preventScroll:true});
+  requestAnimationFrame(()=>{if(modal.open)modal.scrollTop=0;});
  }));
  document.getElementById('profile-close')?.addEventListener('click',()=>modal.close());
  modal.addEventListener('click',ev=>{if(ev.target===modal)modal.close();});
+ modal.addEventListener('close',()=>{modal.scrollTop=0;});
 })();
 
 
