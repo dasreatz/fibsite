@@ -2045,13 +2045,40 @@ body.inner-layout{
 .join-page .aside-panel .action-button.secondary{background:#252728!important}
 
 /* About-bureau CTA should look like the compact, rounded dark-grey nav pill. */
-.home .hero-actions .action-button{min-width:0!important;min-height:42px!important;padding:10px 17px!important;border-radius:11px!important}
+/* Home hero: two equally substantial, coordinated gold actions. */
+.home .hero-actions{gap:15px!important}
+.home .hero-actions .action-button{
+  min-width:216px!important;min-height:56px!important;padding:15px 25px!important;
+  border-radius:12px!important;font-size:14px!important;font-weight:800!important;
+  line-height:1.25!important;letter-spacing:.005em!important;
+  box-shadow:0 4px 18px rgba(0,0,0,.18)!important;
+}
+.home .hero-actions .action-button.primary{
+  background:#edc47b!important;color:#20180d!important;border:1px solid #f4d08d!important;
+}
+.home .hero-actions .action-button.primary:hover,
+.home .hero-actions .action-button.primary:focus-visible{
+  background:#f7d694!important;color:#17120a!important;
+  box-shadow:0 7px 27px rgba(231,180,96,.23)!important;
+}
 .home .hero-actions .action-button.ghost{
-  background:#303234!important;color:#f3f0eb!important;border:0!important;
-  min-width:0!important;box-shadow:none!important;backdrop-filter:none!important;
+  background:linear-gradient(135deg,rgba(147,105,53,.9),rgba(108,75,38,.93))!important;
+  color:#fff0d1!important;border:1px solid rgba(241,194,116,.84)!important;
+  backdrop-filter:blur(5px)!important;
 }
 .home .hero-actions .action-button.ghost:hover,
-.home .hero-actions .action-button.ghost:focus-visible{background:#414244!important;color:#f8deb0!important;border:0!important}
+.home .hero-actions .action-button.ghost:focus-visible{
+  background:linear-gradient(135deg,#ae8246,#825b2e)!important;
+  color:#fff7e6!important;border-color:#f2ce8d!important;
+  box-shadow:0 7px 27px rgba(231,180,96,.2)!important;
+}
+@media(max-width:520px){
+  .home .hero-actions{justify-content:center!important;gap:11px!important}
+  .home .hero-actions .action-button{
+    flex:1 1 100%!important;width:100%!important;min-width:0!important;
+    min-height:52px!important;padding:13px 17px!important;
+  }
+}
 /* The active navigation entry gets the same soft hover as the other entries. */
 .site-header .nav-link.current:hover::before,
 .site-header .nav-link.current:focus-visible::before{display:block!important;opacity:1!important}

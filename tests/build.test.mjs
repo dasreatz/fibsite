@@ -11,7 +11,7 @@ test('42 localized HTML pages with shared CSS, JS and required assets',async()=>
  for(const lang of ['','en/','de/']){
   const html=await readFile(new URL(lang+'index.html',dist),'utf8');
   assert.match(html,/Origin-5\.5\.0/);
-  assert.match(html,/<link rel="stylesheet" href="\/styles\.css\?v=5\.5\.0">/);
+  assert.match(html,/<link rel="stylesheet" href="\/styles\.css\?v=5\.5\.1">/);
   assert.match(html,/<script src="\/app\.js\?v=5\.5\.0" defer><\/script>/);
   assert.doesNotMatch(html,/data:image\/webp;base64,/);
  }
