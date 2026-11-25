@@ -219,7 +219,7 @@ test('each page and language has its own browser title, with versioned assets',(
    assert.match(match[1],/^FIB Olymp \| /);
    assert.ok(!titles.has(match[1]),`${locale}:${slug} repeats a title`);
    titles.add(match[1]);
-   assert.match(html,/\/app\.js\?v=5\.8\.0/);
+   assert.match(html,/\/app\.js\?v=5\.9\.0/);
   }
  }
 });
@@ -264,11 +264,13 @@ test('unmixed language ranks and simplified official bureau section',()=>{
  assert.match(bureau,/Керівництво <em>бюро/);
 });
 
-test('gallery markup has photo-centered controls and overlay close behavior',()=>{
+test('gallery markup has photo-centered controls, fixed viewer and safe close behavior',()=>{
  const html=renderPage('units/csoa','uk');
  assert.match(html,/class="gallery-image-stage"/);
  assert.match(js,/body\.classList\.add\('gallery-open'\)/);
- assert.match(js,/classList\.contains\('unit-gallery-viewer'\)/);
+ assert.match(js,/if\(event\.target===dialog\)close\(\)/);
+ assert.doesNotMatch(js,/classList\.contains\('gallery-image-stage'\)\)close\(\)/);
+ assert.match(css,/\.gallery-image-stage \.gallery-large-image/);
  assert.match(css,/\.gallery-image-stage \.gallery-prev/);
  assert.doesNotMatch(html,/class="gallery-strip"|class="gallery-counter"/);
 });

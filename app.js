@@ -440,7 +440,7 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
  dialog.querySelector('.gallery-next').addEventListener('click',()=>show(position+1));
  dialog.addEventListener('click',event=>{
   // Any empty overlay space closes the photo; clicks on the image and controls do not.
-  if(event.target===dialog||event.target.classList.contains('unit-gallery-viewer')||event.target.classList.contains('gallery-image-stage'))close();
+  if(event.target===dialog)close();
  });
  dialog.addEventListener('keydown',event=>{
   if(event.key==='ArrowRight'){event.preventDefault();show(position+1);}

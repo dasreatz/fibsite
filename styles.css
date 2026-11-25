@@ -2297,3 +2297,96 @@ html:has(.unit-gallery-dialog[open]),body.gallery-open{overflow:hidden!important
   margin:0!important;top:13px!important;right:13px!important;
   z-index:10!important;
 }
+
+
+/* ================================================================
+   FIB Olymp v5.9 — review fixes: uniform CTA, black backgrounds,
+   stable full-screen gallery independent of source photo dimensions.
+   This block intentionally sits after the legacy override rules.
+   ================================================================ */
+:root{--gold-action:#ffb609;--gold-action-hover:#ffcd39}
+/* Match approved bright-gold 'КРИМІНАЛЬНІ ОРГАНІЗАЦІЇ' button treatment.
+   Keep actual button labels, destinations, and locale content unchanged. */
+.action-button,
+.action-button.primary,.action-button.secondary,.action-button.ghost,
+.inner-layout .action-button,
+.home .hero-actions .action-button,
+.home .hero-copy .hero-actions .action-button,
+.home .hero-copy .hero-actions .action-button.primary,
+.home .hero-copy .hero-actions .action-button.ghost{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  min-height:48px!important;padding:12px 23px!important;
+  background:linear-gradient(180deg,#ffc21b 0%,#ffae00 100%)!important;
+  color:#0b0b0a!important;border:1px solid #e5a000!important;
+  border-radius:10px!important;font-family:var(--font-ui)!important;
+  font-weight:900!important;letter-spacing:.012em!important;
+  text-shadow:none!important;text-decoration:none!important;
+  box-shadow:0 4px 15px rgba(255,179,0,.19),inset 0 1px 0 rgba(255,239,166,.43)!important;
+  transition:transform .24s ease,background .24s ease,box-shadow .24s ease!important;
+}
+.action-button:hover,.action-button:focus-visible,
+.action-button.primary:hover,.action-button.secondary:hover,.action-button.ghost:hover,
+.inner-layout .action-button:hover,.inner-layout .action-button:focus-visible,
+.home .hero-copy .hero-actions .action-button:hover,
+.home .hero-copy .hero-actions .action-button:focus-visible,
+.home .hero-copy .hero-actions .action-button.primary:hover,
+.home .hero-copy .hero-actions .action-button.ghost:hover{
+  background:linear-gradient(180deg,#ffd34b 0%,#ffb70c 100%)!important;
+  color:#090909!important;transform:translateY(-2px)!important;
+  border-color:#ffc22d!important;
+  box-shadow:0 7px 22px rgba(255,181,10,.27),inset 0 1px 0 rgba(255,240,176,.45)!important;
+}
+.action-button:disabled{opacity:.46!important;transform:none!important;box-shadow:none!important}
+/* Public division CTA: pure dark page, not the large grey block. */
+.inner-layout .interior-cta{
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  border-radius:0!important;min-height:0!important;
+  margin-top:5px!important;margin-bottom:65px!important;
+  padding:32px 0 30px!important;gap:26px!important;
+}
+.inner-layout .interior-cta h2{
+  color:#f9f7f2!important;font-family:var(--font-display)!important;
+  font-weight:800!important;font-size:clamp(28px,3.2vw,45px)!important;
+  line-height:1.2!important;letter-spacing:-.055em!important;
+}
+.inner-layout .interior-cta p{color:#bdb7af!important;font-size:14px!important;line-height:1.7!important}
+.inner-layout .interior-cta .eyebrow{color:#efbb69!important}
+@media(max-width:760px){.inner-layout .interior-cta{padding:28px 0!important;gap:22px!important;margin-bottom:46px!important}}
+/* The viewer has one fixed stage for EVERY image, including 4K and portrait.
+   The image always fits inside the stage without cropping or changing layout. */
+.unit-gallery-dialog{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;max-width:none!important;max-height:none!important}
+.unit-gallery-dialog .unit-gallery-viewer{
+  width:100%!important;height:100%!important;min-height:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  padding:40px 72px!important;overflow:hidden!important;
+}
+.unit-gallery-dialog .gallery-image-stage{
+  position:relative!important;display:flex!important;justify-content:center!important;align-items:center!important;
+  flex:0 0 auto!important;width:min(1080px,calc(100vw - 150px))!important;
+  height:min(690px,calc(100dvh - 106px))!important;
+  min-width:0!important;min-height:0!important;
+  max-width:calc(100vw - 150px)!important;max-height:calc(100dvh - 106px)!important;
+  overflow:visible!important;
+}
+.unit-gallery-dialog .gallery-image-stage .gallery-large-image{
+  display:block!important;flex:0 0 100%!important;
+  width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;
+  max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+.unit-gallery-dialog .gallery-image-stage .gallery-prev{left:-51px!important}
+.unit-gallery-dialog .gallery-image-stage .gallery-next{right:-51px!important}
+@media(max-width:640px){
+  .unit-gallery-dialog .unit-gallery-viewer{padding:37px 38px!important}
+  .unit-gallery-dialog .gallery-image-stage{
+    width:calc(100vw - 88px)!important;height:calc(100dvh - 100px)!important;
+    max-width:calc(100vw - 88px)!important;max-height:calc(100dvh - 100px)!important;
+  }
+  .unit-gallery-dialog .gallery-image-stage .gallery-prev{left:-35px!important}
+  .unit-gallery-dialog .gallery-image-stage .gallery-next{right:-35px!important}
+}
+@media(max-width:520px){
+  .home .hero-copy .hero-actions .action-button{min-height:49px!important;padding:9px 10px!important;font-size:11px!important}
+  .inner-layout .interior-cta{width:calc(100% - 46px)!important}
+}
