@@ -429,6 +429,10 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   const source=buttons[position];
   image.src=source.dataset.gallerySrc;
   image.alt=source.querySelector('img')?.alt||'';
+  // Preload adjacent slides; these are display-only and do not change order.
+  for(const neighbor of [(position+1)%buttons.length,(position+buttons.length-1)%buttons.length]){
+   const next=new Image();next.src=buttons[neighbor].dataset.gallerySrc;
+  }
  }
  function close(){dialog.close();}
  dialog.addEventListener('close',()=>document.body.classList.remove('gallery-open'));

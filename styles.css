@@ -2390,3 +2390,48 @@ html:has(.unit-gallery-dialog[open]),body.gallery-open{overflow:hidden!important
   .home .hero-copy .hero-actions .action-button{min-height:49px!important;padding:9px 10px!important;font-size:11px!important}
   .inner-layout .interior-cta{width:calc(100% - 46px)!important}
 }
+
+
+/* FIB Olymp v5.10 — compact, confident editorial typography, black-first UI */
+:root{--font-display:'Onest','Manrope','Arial',sans-serif;--font-ui:'Onest','Arial',sans-serif}
+body{font-weight:500;line-height:1.62;background:#080909}
+.inner-layout, .home-layout, .subpage, .home{background:#080909}
+/* More substantial lettering. Deliberately avoid thin, tightly compressed headings. */
+h1,h2,h3,.inner-heading h1,.inner-layout .interior-section-head h2,
+.unit-page .unit-feature-copy h1,.unit-page .unit-story h2,
+.unit-page .unit-about-copy h2,.unit-page .unit-gallery-copy h2,
+.home .home-divisions h2,.home .admissions-band h2{
+  font-family:var(--font-display)!important;font-weight:850!important;
+  letter-spacing:-.032em!important;line-height:1.13!important;
+}
+.inner-layout .inner-heading h1{font-size:clamp(42px,4.7vw,70px)!important}
+.inner-layout .inner-heading{padding-bottom:35px!important}
+.inner-layout .inner-heading>p{font-weight:500;line-height:1.62!important;max-width:65ch}
+.inner-layout .interior-section-head h2{font-size:clamp(27px,2.85vw,40px)!important;margin:6px 0 9px!important}
+.unit-page .unit-feature-copy h1{font-size:clamp(40px,4.2vw,64px)!important}
+.unit-page .unit-story h2,.unit-page .unit-about-copy h2{font-size:clamp(28px,3vw,42px)!important}
+.unit-page .unit-feature-intro,.unit-page .unit-about-copy p{font-weight:500;line-height:1.66!important}
+/* A calmer, less cluttered presentation: fewer decorative borders and badges. */
+.inner-layout .interior-section{padding-top:12px!important;padding-bottom:48px!important}
+.unit-page .unit-responsibilities{gap:10px!important}
+.unit-page .unit-gallery-section{padding-bottom:66px!important}
+.unit-page .unit-gallery-wrap>.eyebrow{background:transparent!important;padding:0!important;
+  border:0!important;color:#e8b95e!important;letter-spacing:.1em!important}
+.unit-page .unit-photo-gallery .unit-gallery-thumb{
+  background:#090a0b!important;box-shadow:none!important;border:0!important;
+  border-radius:8px!important
+}
+.unit-page .unit-photo-gallery{gap:10px!important}
+.inner-layout .interior-cta{background:transparent!important;border:0!important;box-shadow:none!important;
+  padding:18px 0 28px!important;gap:19px!important}
+.inner-layout .interior-cta h2{font-size:clamp(27px,2.6vw,38px)!important;font-weight:850!important}
+.inner-layout .interior-cta .eyebrow{background:transparent!important;padding:0!important;
+  border:0!important;color:#e8b95e!important}
+.inner-layout .interior-cta p{font-size:14px!important;font-weight:500!important}
+.action-button{font-weight:900!important;letter-spacing:.008em!important}
+@media(max-width:760px){
+ .inner-layout .inner-heading h1{font-size:clamp(37px,9vw,52px)!important}
+ .inner-layout .inner-heading{padding-bottom:24px!important}
+ .inner-layout .interior-section{padding-top:9px!important;padding-bottom:39px!important}
+ .unit-page .unit-gallery-section{padding-bottom:52px!important}
+}
