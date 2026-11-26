@@ -83,7 +83,7 @@ test('all four division routes and cards are linked',()=>{
   assert.match(renderPage('units/'+u.id),new RegExp(`assets/units/${u.id}\\.webp`));
   const detail=renderPage('units/'+u.id);
   assert.doesNotMatch(detail,/Мінімальне звання|unit-selection|unit-back|unit-recruitment/);
-  assert.match(detail,new RegExp(`assets/units/details/${u.id}\\.webp`));
+  assert.match(detail,/class="unit-photo-gallery"/);
   assert.match(detail,/Керівник/);
   assert.match(detail,/Заступник/);
  }
@@ -177,7 +177,7 @@ test('public individual division pages hide selection details, but academy discl
  for(const lang of ['uk','en','de'])for(const u of units){
   const html=renderPage('units/'+u.id,lang);
   assert.doesNotMatch(html,/unit-selection|unit-recruitment|unit-back/);
-  assert.match(html,new RegExp(`assets/units/details/${u.id}\\.webp`));
+  assert.match(html,/class="unit-photo-gallery"/);
  }
  const academy=renderPage('academy');
  assert.match(academy,/class="training-step"/);
@@ -219,7 +219,7 @@ test('each page and language has its own browser title, with versioned assets',(
    assert.match(match[1],/^FIB Olymp \| /);
    assert.ok(!titles.has(match[1]),`${locale}:${slug} repeats a title`);
    titles.add(match[1]);
-   assert.match(html,/\/app\.js\?v=5\.9\.0/);
+   assert.match(html,/\/app\.js\?v=5\.10\.0/);
   }
  }
 });

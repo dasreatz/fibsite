@@ -31,19 +31,36 @@ function portraitPath(stem){
  return null;
 }
 
+// A division gallery is a single ordered collection, not a mixture of hero images,
+// detail thumbnails and the same photographs under different filenames. Gallery
+// assets with numeric names are shown in numeric order; other names come after.
 function unitGalleryImages(id){
- const images=[`/assets/units/${id}.webp`,`/assets/units/details/${id}.webp`];
- if(id==='csoa') images.push('/assets/hero-csoa.webp');
  const directory=join(galleryRoot,id);
- if(existsSync(directory)){
-  const files=readdirSync(directory,{withFileTypes:true})
-    .filter(entry=>entry.isFile()&&/\.(webp|jpe?g|png|avif)$/i.test(entry.name))
-    .map(entry=>entry.name).sort((a,b)=>a.localeCompare(b,'uk',{numeric:true}));
-  for(const name of files) images.push(`/assets/units/gallery/${id}/${encodeURIComponent(name)}`);
+ if(!existsSync(directory)){
+  // Fallback only if a division has no dedicated gallery folder.
+  return [`/assets/units/${id}.webp`,`/assets/units/details/${id}.webp`];
  }
- return [...new Set(images)];
+ const orderKey=(name)=>{
+  const stem=name.replace(/\.(webp|jpe?g|png|avif)$/i,'');
+  const numbered=stem.match(/^(?:csoa|gur|gsu|dkb|agent|cyber)(\d+)$/i);
+  if(numbered)return [0,Number(numbered[1]),''];
+  const bracket=stem.match(/\((\d+)\)$/);
+  if(bracket)return [1,Number(bracket[1]),stem];
+  return [2,0,stem];
+ };
+ const files=readdirSync(directory,{withFileTypes:true})
+   .filter(entry=>entry.isFile()&&/\.(webp|jpe?g|png|avif)$/i.test(entry.name))
+   .map(entry=>entry.name)
+   .sort((a,b)=>{
+     const x=orderKey(a),y=orderKey(b);
+     return x[0]-y[0]||x[1]-y[1]||x[2].localeCompare(y[2],'uk')||a.localeCompare(b,'uk');
+   });
+ // The primary GSU story picture is distinct from numbered gallery pictures.
+ // Other divisions' hero/detail images duplicate their gallery photographs.
+ const images=files.map(name=>`/assets/units/gallery/${id}/${encodeURIComponent(name)}`);
+ if(id==='gsu')images.push('/assets/units/gsu.webp');
+ return images;
 }
-
 
 
 export function renderInterior(slug, locale='uk') {
