@@ -72,8 +72,8 @@ export function renderInterior(slug, locale='uk') {
  const panel=(tag,title,desc,href=null)=>`<${href?'a':'article'} class="info-panel" ${href?`href="${esc(href)}"`:''}><span class="info-panel-tag">${esc(tag)}</span><h3>${esc(title)}</h3><p>${esc(desc)}</p></${href?'a':'article'}>`;
  const section=(clazz,body)=>`<section class="page-wrap interior-section ${clazz}">${body}</section>`;
  const icon = kind => ({
-  news:`<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H18a2 2 0 0 1 2 2v10.5A3.5 3.5 0 0 1 16.5 19H7.5A3.5 3.5 0 0 1 4 15.5V5.5Zm3-.5v10.5A1.5 1.5 0 0 0 8.5 17H16V5H7Zm3 3h5.5v1.5H10V8Zm0 3h5.5v1.5H10V11Zm0 3h3.5v1.5H10V14ZM7.75 8.1h1.1v1.1h-1.1V8.1Zm0 3h1.1v1.1h-1.1v-1.1Zm0 3h1.1v1.1h-1.1v-1.1Z" fill="currentColor"/></svg>`,
-  document:`<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7.8L20 8.2V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm7 1.8V9h4.2L14 4.8ZM9 11h6v1.5H9V11Zm0 3.5h6v1.5H9v-1.5Zm0-7h3v1.5H9V7.5Z" fill="currentColor"/></svg>`,
+  news:`<span class="classic-state-symbol" aria-hidden="true">📰</span>`,
+  document:`<span class="classic-state-symbol" aria-hidden="true">📄</span>`,
   recruit:`<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Zm0 2c-3.8 0-7 2-7 4.5V21h14v-2.5C19 16 15.8 14 12 14Zm6.2-5.4V6.9h-1.7V5.2H15v1.7h-1.7v1.7H15v1.7h1.5V8.6Z" fill="currentColor"/></svg>`,
   chat:`<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H9l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm2.4 4.4a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Zm4.6 0a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Zm4.6 0a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z" fill="currentColor"/></svg>`,
   mail:`<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Zm0 2v.2l8 5 8-5V8l-8 5-8-5Z" fill="currentColor"/></svg>`,

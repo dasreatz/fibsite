@@ -19,8 +19,9 @@ test('compact news, document and contact icons have explicit dimension safeguard
   for (const slug of ['news','documents']) {
     const html = renderPage(slug);
     assert.match(html, /class="news-state-icon"/);
-    assert.match(html, /<svg width="28" height="28"/);
-    assert.match(css, /news-state-icon svg[^\n]*width:39px!important/);
+    assert.ok(html.includes(slug === 'news' ? '📰' : '📄'));
+    assert.match(html, /class="classic-state-symbol"/);
+    assert.match(css, /\.classic-state-symbol\{[^\n]*34px/);
   }
   const contacts = renderPage('contacts');
   for (const service of ['discord','instagram','tiktok']) {

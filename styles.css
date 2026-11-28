@@ -2457,3 +2457,8 @@ h1,h2,h3,.inner-heading h1,.inner-layout .interior-section-head h2,
   color:#fff!important;
   box-shadow:none!important;
 }
+
+/* Original empty-state pictograms */
+.news-page .news-empty-state .news-state-icon,.documents-page .news-empty-state .news-state-icon{background:none!important;box-shadow:none!important;border:0!important;filter:none!important;text-shadow:none!important;color:#777!important;width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;max-width:48px!important;max-height:48px!important}
+.classic-state-symbol{display:block;font:normal 34px/1 'Segoe UI Emoji','Apple Color Emoji',sans-serif;filter:grayscale(1);opacity:.55;text-shadow:none!important}
+.record-card-icon .classic-state-symbol{font-size:19px}
