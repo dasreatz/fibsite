@@ -11,6 +11,13 @@ const fibText=(uk,en,de)=>FIB_LANG==='en'?en:FIB_LANG==='de'?de:uk;
 const RUNTIME_TEXT=[
  ['Новачок','No experience','Keine Vorerfahrung'],['Є досвід RP','Practical experience','Praktische Erfahrung'],['Практичний досвід','Practical experience','Praktische Erfahrung'],['Є досвід державних організацій','Public service experience','Erfahrung im öffentlichen Dienst'],
  ['Відкрити меню','Open menu','Menü öffnen'],['Закрити меню','Close menu','Menü schließen'],
+ ["Підключити Telegram", "Connect Telegram", "Telegram verbinden"],
+ ["Зареєстровано", "Registered", "Registriert"],
+ ["Створіть пароль для облікового запису.", "Create your account password.", "Erstellen Sie Ihr Kontopasswort."],
+ ["Код запрошення відсутній. Відкрийте посилання з електронної пошти.", "Invitation code missing. Open the link from your email.", "Einladungscode fehlt. Öffnen Sie den Link in Ihrer E-Mail."],
+ ["Перевірте пароль і підтвердження.", "Check the password and confirmation.", "Prüfen Sie Passwort und Bestätigung."],
+ ["Перевірте електронну пошту для отримання запрошення.", "Check your email for the invitation.", "Prüfen Sie Ihre E-Mails auf die Einladung."],
+ ["Запрошення вже використано.", "The invitation has already been used.", "Die Einladung wurde bereits verwendet."],
  ['Сервер заявок недоступний. Дані не надіслано.','The application server is unavailable. No data was sent.','Der Bewerbungsserver ist nicht verfügbar. Es wurden keine Daten gesendet.'],
  ['Не вдалося виконати запит.','Could not complete the request.','Die Anfrage konnte nicht abgeschlossen werden.'],
  ['На розгляді','Under review','In Bearbeitung'],['Схвалено','Approved','Genehmigt'],['Відхилено','Rejected','Abgelehnt'],
@@ -173,7 +180,7 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   };
   const putText=(el,text)=>{if(el)el.textContent=fibRuntimeTranslate(text);};
   const add=(parent,tag,text,cls='')=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=fibRuntimeTranslate(text);parent.appendChild(el);return el;};
-  const statusText = {pending:'На розгляді',approved:'Схвалено',rejected:'Відхилено'};
+  const statusText = {pending:'На розгляді',approved:'Схвалено',rejected:'Відхилено',registered:'Зареєстровано'};
   const avail=document.getElementById('application-availability');
   const form=document.getElementById('application-form');
   const formFeedback=document.getElementById('application-feedback');
@@ -193,11 +200,12 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
       if(rpName.length<3||motivation.length<30||!experience||!form.elements.consent.checked){putText(formFeedback,'Заповни всі обов’язкові поля та перевір відповіді (мотивація від 30 символів).');return;}
       submit.disabled=true;putText(formFeedback,'Надсилаємо анкету…');
       try{
-        const data=await post('/api/applications',{rpName,experience,motivation,consent:true});
+        const data=await post('/api/applications',{rpName,experience,motivation,email:form.elements.email?.value.trim(),telegramOptIn:!!form.elements.telegramOptIn?.checked,consent:true});
         form.hidden=true;success.hidden=false;success.replaceChildren();
         add(success,'strong','Анкету прийнято!');add(success,'p','Збережи обидва значення. Без секретного коду перевірити статус не вийде.');
         add(success,'p','Номер заявки');add(success,'code',data.id,'secret-display');
         add(success,'p','Секретний код');add(success,'code',data.code,'secret-display');
+        if(data.telegramUrl){const link=add(success,'a','Підключити Telegram','action-button secondary');link.href=data.telegramUrl;link.target='_blank';link.rel='noopener noreferrer';}
         const copy=add(success,'button','Скопіювати дані','action-button secondary');copy.type='button';
         copy.addEventListener('click',()=>{
           if(!navigator.clipboard){putText(formFeedback,'Виділи номер і код вручну та збережи.');return;}
@@ -220,12 +228,12 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
         add(out,'strong',statusText[data.status]||'Статус заявки');
         add(out,'p',`Заявка ${data.id} · ${data.rpName}`);
         if(data.status==='approved'&&data.invitation){
-          if(data.invitation.used)add(out,'p','Запрошення на наступний етап уже підтверджено.');
+          if(data.invitation.used)add(out,'p','Запрошення вже використано.');
           else if(data.invitation.expired)add(out,'p','Термін запрошення минув. Керівництво може видати нове.');
           else if(data.invitation.url){
             add(out,'p',`Запрошення чинне до ${new Date(data.invitation.expiresAt).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_LANG==='de'?'de-DE':'uk-UA')}.`);
             const a=add(out,'a','Відкрити одноразове запрошення');a.href=FIB_LANG==='uk'?data.invitation.url:data.invitation.url.replace('/invitation/',`/${FIB_LANG}/invitation/`);
-          }
+          }else add(out,'p','Перевірте електронну пошту для отримання запрошення.');
         }
         if(data.status==='pending')add(out,'p','Керівництво ще не ухвалило рішення. Перевір статус пізніше.');
         if(data.status==='rejected')add(out,'p','Анкету не схвалено.');
@@ -278,11 +286,11 @@ const fibDate=value=>new Date(value).toLocaleString(FIB_LANG==='en'?'en-GB':FIB_
   const redeem=document.getElementById('redeem-invite');
   if(redeem){
     const fb=document.getElementById('invitation-feedback'),code=decodeURIComponent(location.hash.replace(/^#/,''));
-    if(code.length>=15){redeem.disabled=false;putText(fb,'Можеш підтвердити отримання запрошення.');}
-    else putText(fb,'Код запрошення відсутній. Відкрий посилання зі статусу заявки.');
+    if(code.length>=15){redeem.disabled=false;putText(fb,'Створіть пароль для облікового запису.');}
+    else putText(fb,'Код запрошення відсутній. Відкрийте посилання з електронної пошти.');
     redeem.addEventListener('click',async()=>{
       redeem.disabled=true;putText(fb,'Перевіряємо запрошення…');
-      try{await post('/api/invitation/redeem',{code});history.replaceState(null,'',location.pathname);putText(fb,'Запрошення підтверджено. Наступні дії узгоджуються з керівництвом FIB.');}
+      try{const password=document.getElementById('invite-password')?.value||'';if(password.length<12||password!==document.getElementById('invite-confirm')?.value)throw Error('Перевірте пароль і підтвердження.');await post('/api/invitation/redeem',{code,password});history.replaceState(null,'',location.pathname);location.assign('/cabinet/');}
       catch(err){putText(fb,err.message);redeem.disabled=false;}
     });
   }

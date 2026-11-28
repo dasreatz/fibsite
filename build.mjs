@@ -34,4 +34,5 @@ await cp(new URL('assets/', root), new URL('assets/', dist), { recursive: true }
 const css = await readFile(new URL('styles.css', root), 'utf8');
 await writeFile(new URL('styles.css', dist), prefixPublicPaths(css));
 await cp(new URL('app.js', root), new URL('app.js', dist));
+await cp(new URL('cabinet/', root), new URL('cabinet/', dist), {recursive:true});
 console.log(`Built ${routes.length * 3} localized pages in dist/ (base path ${basePath}).`);

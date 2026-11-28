@@ -27,6 +27,6 @@ test('source layout has no obsolete parallel app or duplicate published pages',a
  const names=await readdir(new URL('../',import.meta.url));
  for(const name of ['src','public','scripts','activity','index.html','en','de','bureau','units','news','documents','academy','contacts','join','staff','invitation'])
   assert.ok(!names.includes(name),`obsolete source or generated duplicate: ${name}`);
- for(const name of ['app','assets','lib','tests','dist','build.mjs','server.mjs','styles.css','app.js','.github'])
+ for(const name of ['app','assets','lib','tests','dist','build.mjs','server.mjs','styles.css','app.js','cabinet','supabase','render.yaml'])
   assert.ok(names.includes(name),`missing canonical source: ${name}`);
 });

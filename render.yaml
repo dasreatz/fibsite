@@ -1,5 +1,3 @@
-# Optional Render Blueprint for a new Web Service.
-# Existing manually created services still need Settings -> Build & Deploy updated.
 services:
   - type: web
     name: fib-olymp-site
@@ -8,4 +6,26 @@ services:
     buildCommand: npm run build
     startCommand: npm start
     healthCheckPath: /
-    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: FIB_PUBLIC_URL
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: FIB_EMAIL_FROM
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_BOT_USERNAME
+        sync: false
+      - key: TELEGRAM_WEBHOOK_SECRET
+        sync: false
+      - key: FIB_APPLICATIONS_OPEN
+        value: 'false'
